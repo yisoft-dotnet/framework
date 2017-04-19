@@ -1,0 +1,8 @@
+.vs/
+tools/nuget/
+bin/
+obj/
+
+*.lock.json
+*.user
+*.nupkg
