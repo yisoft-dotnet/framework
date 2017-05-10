@@ -29,6 +29,8 @@ namespace Yisoft.Framework
 
 		public const string Production = "production";
 
+		public const string Demonstration = "demonstration";
+
 		public static string NormalizeEnvName(string envName, string defaultValue = Local)
 		{
 			if (string.IsNullOrWhiteSpace(envName)) return defaultValue ?? string.Empty;
