@@ -4,7 +4,7 @@
 		<Description>dotnet convenient development framework.</Description>
 		<Copyright>Copyright © Yi.TEAM. All rights reserved.</Copyright>
 		<AssemblyTitle>Yisoft.Framework</AssemblyTitle>
-		<VersionPrefix>1.4.0</VersionPrefix>
+		<VersionPrefix>1.5.0</VersionPrefix>
 		<Authors>ymind.chan@yi.team</Authors>
 		<TargetFrameworks>netstandard1.6;net46;</TargetFrameworks>
 		<DebugType>portable</DebugType>
@@ -33,10 +33,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
 		<PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
 		<PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net46'">
-		<PackageReference Include="System.Net.Http" Version="4.3.1" />
+		<PackageReference Include="System.Net.Http" Version="4.3.2" />
 	</ItemGroup>
 
 </Project>
