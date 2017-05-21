@@ -4,7 +4,7 @@
 		<Description>dotnet convenient development framework.</Description>
 		<Copyright>Copyright © Yi.TEAM. All rights reserved.</Copyright>
 		<AssemblyTitle>Yisoft.Framework</AssemblyTitle>
-		<VersionPrefix>1.5.0</VersionPrefix>
+		<VersionPrefix>1.6.0</VersionPrefix>
 		<Authors>ymind.chan@yi.team</Authors>
 		<TargetFrameworks>netstandard1.6;net46;</TargetFrameworks>
 		<DebugType>portable</DebugType>
