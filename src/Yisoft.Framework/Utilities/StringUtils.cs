@@ -390,5 +390,43 @@ namespace Yisoft.Framework.Utilities
 
 			return list.ToArray();
 		}
+
+		public static string ToSBC(string input)
+		{
+			var c = input.ToCharArray();
+
+			for (var i = 0; i < c.Length; i++)
+			{
+				if (c[i] == 32)
+				{
+					c[i] = (char) 12288;
+
+					continue;
+				}
+
+				if (c[i] < 127) c[i] = (char) (c[i] + 65248);
+			}
+
+			return new string(c);
+		}
+
+		public static string ToDBC(string input)
+		{
+			var c = input.ToCharArray();
+
+			for (var i = 0; i < c.Length; i++)
+			{
+				if (c[i] == 12288)
+				{
+					c[i] = (char) 32;
+
+					continue;
+				}
+
+				if (c[i] > 65280 && c[i] < 65375) c[i] = (char) (c[i] - 65248);
+			}
+
+			return new string(c);
+		}
 	}
 }

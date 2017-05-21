@@ -188,6 +188,10 @@ namespace Yisoft.Framework.Extensions
 
 		public static string ToPascalCase(this string s) { return StringUtils.ToPascalCase(s); }
 
+		public static string ToSBC(this string s) { return StringUtils.ToSBC(s); }
+
+		public static string ToDBC(this string s) { return StringUtils.ToDBC(s); }
+
 		[DebuggerStepThrough]
 		public static string ToSpaceSeparatedString(this IEnumerable<string> list)
 		{
