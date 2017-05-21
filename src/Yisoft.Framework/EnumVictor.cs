@@ -195,7 +195,7 @@ namespace Yisoft.Framework
 		/// <summary>
 		/// 返回与指定自定义描述字符串相匹配的枚举值。
 		/// </summary>
-		/// <param name="descriptionValue">表示枚举值自定义描述的 <see cref="System.String"/>。</param>
+		/// <param name="descriptionValue">表示枚举值自定义描述的 <see cref="string"/>。</param>
 		/// <param name="ignoreCase">指示所进行的比较是否区分大小写。（true 指示所进行的比较不区分大小写。）</param>
 		/// <param name="canFilter">指定是否允许从自定义描述字典中查找匹配项。</param>
 		/// <returns>返回 <typeparamref name="TEnum"/>。</returns>

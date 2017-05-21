@@ -30,7 +30,11 @@ namespace Yisoft.Framework.Extensions
 
 				if (jobject.TryGetValue(item.Key, out token)) throw new Exception("Item does already exist - cannot add it via a custom entry: " + item.Key);
 
-				jobject.Add(item.Value.GetType().GetTypeInfo().IsClass ? new JProperty(item.Key, JToken.FromObject(item.Value)) : new JProperty(item.Key, item.Value));
+				jobject.Add(
+					item.Value.GetType().GetTypeInfo().IsClass
+						? new JProperty(item.Key, JToken.FromObject(item.Value))
+						: new JProperty(item.Key, item.Value)
+				);
 			}
 		}
 	}
