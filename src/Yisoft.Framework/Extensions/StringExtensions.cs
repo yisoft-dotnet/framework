@@ -692,7 +692,7 @@ namespace Yisoft.Framework.Extensions
 			return str.Substring(numChars);
 		}
 
-		public static string TryRemoveStart(this string str, int numChars) { return numChars > str.Length ? "" : str.Substring(numChars); }
+		public static string TryRemoveStart(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(numChars); }
 
 		public static string RemoveEnd(this string str, int numChars)
 		{
@@ -701,7 +701,7 @@ namespace Yisoft.Framework.Extensions
 			return str.Substring(0, str.Length - numChars);
 		}
 
-		public static string TryRemoveEnd(this string str, int numChars) { return numChars > str.Length ? "" : str.Substring(0, str.Length - numChars); }
+		public static string TryRemoveEnd(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars); }
 
 		public static List<string> SplitInGroupsOf(this string str, int maxChars)
 		{
@@ -721,16 +721,23 @@ namespace Yisoft.Framework.Extensions
 
 		public static string PadChopRight(this string str, int length)
 		{
-			str = str ?? "";
+			str = str ?? string.Empty;
 
 			return str.Length > length ? str.Substring(0, length) : str.PadRight(length);
 		}
 
 		public static string PadChopLeft(this string str, int length)
 		{
-			str = str ?? "";
+			str = str ?? string.Empty;
 
 			return str.Length > length ? str.Substring(str.Length - length, length) : str.PadLeft(length);
+		}
+
+		public static string[] Lines(this string str)
+		{
+			if (!str.HasText()) return new string[0];
+
+			return str.Split(new[] {"\r\n", "\n"}, StringSplitOptions.None);
 		}
 	}
 }
