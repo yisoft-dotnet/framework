@@ -151,9 +151,7 @@ namespace Yisoft.Framework.Threading
 
 			while (ObjectsCount > MaximumPoolSize)
 			{
-				T dequeuedObjectToDestroy;
-
-				if (!_pooledObjects.TryDequeue(out dequeuedObjectToDestroy)) continue;
+				if (!_pooledObjects.TryDequeue(out T dequeuedObjectToDestroy)) continue;
 
 				Diagnostics.IncrementPoolOverflowCount();
 
@@ -193,9 +191,7 @@ namespace Yisoft.Framework.Threading
 		/// <returns>返回 <typeparamref name="T"/> 对象的实例。</returns>
 		public T GetObject()
 		{
-			T dequeuedObject;
-
-			if (_pooledObjects.TryDequeue(out dequeuedObject))
+			if (_pooledObjects.TryDequeue(out T dequeuedObject))
 			{
 				ThreadPool.QueueUserWorkItem(o => _AdjustPoolSizeToBounds());
 

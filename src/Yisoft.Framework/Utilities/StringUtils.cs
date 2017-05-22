@@ -53,7 +53,7 @@ namespace Yisoft.Framework.Utilities
 		/// 返回清除了空行的字符串的副本。
 		/// </summary>
 		/// <param name="text">要处理的字符串。</param>
-		/// <returns><see cref="System.String"/>。</returns>
+		/// <returns><see cref="string"/>。</returns>
 		public static string StripBlankLine(string text)
 		{
 			return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"\n\s*\n", "\n", _REGEX_OPTIONS);
@@ -63,7 +63,7 @@ namespace Yisoft.Framework.Utilities
 		/// 返回清除了所有 HTML 标记的字符串的副本。
 		/// </summary>
 		/// <param name="text">包含要处理的文本的字符串。</param>
-		/// <returns>str<see cref="System.String"/>。ing</returns>
+		/// <returns>str<see cref="string"/>。ing</returns>
 		public static string StripHtml(string text)
 		{
 			return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"<\/?[^>]*>", string.Empty, _REGEX_OPTIONS);
@@ -107,7 +107,7 @@ namespace Yisoft.Framework.Utilities
 		/// <param name="startindex">要截取的子字符串的开始位置。</param>
 		/// <param name="length">要截取的子字符串的长度。</param>
 		/// <param name="append">如果被截取，可以指定尾部要追加的内容。</param>
-		/// <returns><see cref="System.String"/>。</returns>
+		/// <returns><see cref="string"/>。</returns>
 		public static string SubString(string content, int startindex, int length, string append)
 		{
 			if (string.IsNullOrEmpty(content)) return string.Empty;
@@ -389,6 +389,44 @@ namespace Yisoft.Framework.Utilities
 			list.Add(new string(charArray, tokenStart, charArray.Length - tokenStart));
 
 			return list.ToArray();
+		}
+
+		public static string ToSBC(string input)
+		{
+			var c = input.ToCharArray();
+
+			for (var i = 0; i < c.Length; i++)
+			{
+				if (c[i] == 32)
+				{
+					c[i] = (char) 12288;
+
+					continue;
+				}
+
+				if (c[i] < 127) c[i] = (char) (c[i] + 65248);
+			}
+
+			return new string(c);
+		}
+
+		public static string ToDBC(string input)
+		{
+			var c = input.ToCharArray();
+
+			for (var i = 0; i < c.Length; i++)
+			{
+				if (c[i] == 12288)
+				{
+					c[i] = (char) 32;
+
+					continue;
+				}
+
+				if (c[i] > 65280 && c[i] < 65375) c[i] = (char) (c[i] - 65248);
+			}
+
+			return new string(c);
 		}
 	}
 }

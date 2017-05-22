@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Yisoft.Framework.Extensions
 {
@@ -30,6 +31,35 @@ namespace Yisoft.Framework.Extensions
 			where T : class
 		{
 			return source.Distinct(new DynamicEqualityComparer<T>(comparer));
+		}
+
+		public static string ToString<T>(this IEnumerable<T> source, string separator)
+		{
+			StringBuilder sb = null;
+			foreach (var item in source)
+			{
+				if (sb == null) sb = new StringBuilder();
+				else sb.Append(separator);
+
+				sb.Append(item);
+			}
+
+			return sb == null ? string.Empty : sb.ToString();
+		}
+
+		public static string ToString<T>(this IEnumerable<T> source, Func<T, string> toString, string separator)
+		{
+			StringBuilder sb = null;
+
+			foreach (var item in source)
+			{
+				if (sb == null) sb = new StringBuilder();
+				else sb.Append(separator);
+
+				sb.Append(toString(item));
+			}
+
+			return sb == null ? string.Empty : sb.ToString();
 		}
 
 		private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T>

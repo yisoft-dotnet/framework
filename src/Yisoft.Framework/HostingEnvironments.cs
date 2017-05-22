@@ -38,13 +38,14 @@ namespace Yisoft.Framework
 			return envName.ToLower();
 		}
 
-		public static string Postfix(string input, string envName, string hiddenValue = Local)
+		public static string Postfix(string input, string envName, string hiddenValue = Local, string separator = "_")
 		{
 			if (input == null) throw new ArgumentNullException(nameof(input));
 
 			var suffix = NormalizeEnvName(envName, hiddenValue);
 
-			suffix = suffix == hiddenValue ? string.Empty : "_" + suffix;
+			separator = string.IsNullOrEmpty(separator) ? "_" : separator;
+			suffix = suffix == hiddenValue ? string.Empty : separator + suffix;
 
 			return $"{input}{suffix}";
 		}

@@ -15,27 +15,42 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Newtonsoft.Json.Linq;
+using System.Linq;
+using Yisoft.Framework.Collections.Generic;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class DictionaryExtensions
+	public static class GroupExtensions
 	{
-		public static void AddDictionary(this JObject jobject, Dictionary<string, object> dictionary)
+		public static IEnumerable<IGrouping<TKey, T>> GroupWhenChange<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> getGroupKey)
 		{
-			foreach (var item in dictionary)
+			Grouping<TKey, T> current = null;
+
+			foreach (var item in collection)
 			{
-				JToken token;
+				if (current == null)
+				{
+					current = new Grouping<TKey, T>(getGroupKey(item))
+					{
+						item
+					};
+				}
+				else if (current.Key.Equals(getGroupKey(item)))
+				{
+					current.Add(item);
+				}
+				else
+				{
+					yield return current;
 
-				if (jobject.TryGetValue(item.Key, out token)) throw new Exception("Item does already exist - cannot add it via a custom entry: " + item.Key);
-
-				jobject.Add(
-					item.Value.GetType().GetTypeInfo().IsClass
-						? new JProperty(item.Key, JToken.FromObject(item.Value))
-						: new JProperty(item.Key, item.Value)
-				);
+					current = new Grouping<TKey, T>(getGroupKey(item))
+					{
+						item
+					};
+				}
 			}
+
+			if (current != null) yield return current;
 		}
 	}
 }
