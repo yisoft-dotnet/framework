@@ -188,6 +188,10 @@ namespace Yisoft.Framework.Extensions
 
 		public static string ToPascalCase(this string s) { return StringUtils.ToPascalCase(s); }
 
+		public static string ToSBC(this string s) { return StringUtils.ToSBC(s); }
+
+		public static string ToDBC(this string s) { return StringUtils.ToDBC(s); }
+
 		[DebuggerStepThrough]
 		public static string ToSpaceSeparatedString(this IEnumerable<string> list)
 		{
@@ -310,6 +314,430 @@ namespace Yisoft.Framework.Extensions
 			if (idx >= 0) url = url.Substring(0, idx);
 
 			return url;
+		}
+
+		public static bool HasText(this string str) { return !string.IsNullOrEmpty(str); }
+
+		public static string AssertHasText(this string str, string errorMessage)
+		{
+			if (str.HasText()) return str;
+
+			throw new ArgumentException(errorMessage);
+		}
+
+		public static bool Contains(this string source, string toCheck, StringComparison comp) { return source.IndexOf(toCheck, comp) >= 0; }
+
+		private static InvalidOperationException _NotFound(string str, char separator)
+		{
+			return new InvalidOperationException($"Separator '{separator}' not found in '{str}'");
+		}
+
+		private static InvalidOperationException _NotFound(string str, string separator)
+		{
+			return new InvalidOperationException($"Separator '{separator}' not found in '{str}'");
+		}
+
+		/// <summary>
+		/// get the substring before the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns></returns>
+		public static string Before(this string str, char separator)
+		{
+			var index = str.IndexOf(separator);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring before the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns></returns>
+		public static string Before(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			var index = str.IndexOf(separator, comparisonType);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring after the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns></returns>
+		public static string After(this string str, char separator)
+		{
+			var index = str.IndexOf(separator);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(index + 1);
+		}
+
+		/// <summary>
+		/// get the substring after the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns></returns>
+		public static string After(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			var index = str.IndexOf(separator, comparisonType);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(index + separator.Length);
+		}
+
+
+		/// <summary>
+		/// get the substring before the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring before the first occurence of the separator or null if not found</returns>
+		public static string TryBefore(this string str, char separator)
+		{
+			if (str == null) return null;
+
+			var index = str.IndexOf(separator);
+
+			return index == -1 ? null : str.Substring(0, index);
+		}
+
+
+		/// <summary>
+		/// get the substring before the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring before the first occurence of the separator or null if not found</returns>
+		public static string TryBefore(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (str == null) return null;
+
+			var index = str.IndexOf(separator, comparisonType);
+
+			return index == -1 ? null : str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring after the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring after the first occurence of the separator or null if not found</returns>
+		public static string TryAfter(this string str, char separator)
+		{
+			if (str == null) return null;
+
+			var index = str.IndexOf(separator);
+
+			return index == -1 ? null : str.Substring(index + 1);
+		}
+
+		/// <summary>
+		/// get the substring after the first occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring after the first occurence of the separator or null if not found</returns>
+		public static string TryAfter(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (str == null) return null;
+
+			var index = str.IndexOf(separator, comparisonType);
+
+			return index == -1 ? null : str.Substring(index + separator.Length);
+		}
+
+		/// <summary>
+		/// get the substring before the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring before the last occurence of the separator</returns>
+		public static string BeforeLast(this string str, char separator)
+		{
+			var index = str.LastIndexOf(separator);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring before the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring before the last occurence of the separator</returns>
+		public static string BeforeLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			var index = str.LastIndexOf(separator, comparisonType);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring after the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring after the last occurence of the separator</returns>
+		public static string AfterLast(this string str, char separator)
+		{
+			var index = str.LastIndexOf(separator);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(index + 1);
+		}
+
+		/// <summary>
+		/// get the substring after the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring after the last occurence of the separator</returns>
+		public static string AfterLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			var index = str.LastIndexOf(separator, comparisonType);
+
+			if (index == -1) throw _NotFound(str, separator);
+
+			return str.Substring(index + separator.Length);
+		}
+
+		/// <summary>
+		/// get the substring before the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring before the last occurence of the separator or null if not found</returns>
+		public static string TryBeforeLast(this string str, char separator)
+		{
+			if (str == null) return null;
+
+			var index = str.LastIndexOf(separator);
+
+			return index == -1 ? null : str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring before the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring before the last occurence of the separator or null if not found</returns>
+		public static string TryBeforeLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (str == null) return null;
+
+			var index = str.LastIndexOf(separator, comparisonType);
+
+			return index == -1 ? null : str.Substring(0, index);
+		}
+
+		/// <summary>
+		/// get the substring after the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <returns>the substring after the last occurence of the separator or null if not found</returns>
+		public static string TryAfterLast(this string str, char separator)
+		{
+			if (str == null) return null;
+
+			var index = str.LastIndexOf(separator);
+
+			return index == -1 ? null : str.Substring(index + 1);
+		}
+
+		/// <summary>
+		/// get the substring after the last occurence of the separator
+		/// </summary>
+		/// <param name="str"></param>
+		/// <param name="separator"></param>
+		/// <param name="comparisonType"></param>
+		/// <returns>the substring after the last occurence of the separator or null if not found</returns>
+		public static string TryAfterLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (str == null) return null;
+
+			var index = str.LastIndexOf(separator, comparisonType);
+
+			return index == -1 ? null : str.Substring(index + separator.Length);
+		}
+
+		public static string Between(this string str,
+			string firstSeparator,
+			string secondSeparator = null,
+			StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (secondSeparator == null) secondSeparator = firstSeparator;
+
+			var start = str.IndexOf(firstSeparator, comparisonType);
+
+			if (start == -1) throw _NotFound(str, firstSeparator);
+
+			start = start + firstSeparator.Length;
+
+			var end = str.IndexOf(secondSeparator, start, comparisonType);
+
+			if (start == -1) throw _NotFound(str, secondSeparator);
+
+			return str.Substring(start, end - start);
+		}
+
+		public static string Between(this string str, char firstSeparator, char secondSeparator = (char) 0)
+		{
+			if (secondSeparator == 0) secondSeparator = firstSeparator;
+
+			var start = str.IndexOf(firstSeparator);
+
+			if (start == -1) throw _NotFound(str, firstSeparator);
+
+			start = start + 1;
+
+			var end = str.IndexOf(secondSeparator, start);
+
+			if (start == -1) throw _NotFound(str, secondSeparator);
+
+			return str.Substring(start, end - start);
+		}
+
+		public static string TryBetween(this string str,
+			string firstSeparator,
+			string secondSeparator = null,
+			StringComparison comparisonType = StringComparison.Ordinal)
+		{
+			if (secondSeparator == null) secondSeparator = firstSeparator;
+
+			var start = str.IndexOf(firstSeparator, comparisonType);
+
+			if (start == -1) return null;
+
+			start = start + 1;
+
+			var end = str.IndexOf(secondSeparator, start, comparisonType);
+
+			return start == -1 ? null : str.Substring(start, end - start);
+		}
+
+		public static string TryBetween(this string str, char firstSeparator, char secondSeparator = (char) 0)
+		{
+			if (secondSeparator == 0) secondSeparator = firstSeparator;
+
+			var start = str.IndexOf(firstSeparator);
+
+			if (start == -1) return null;
+
+			start = start + 1;
+
+			var end = str.IndexOf(secondSeparator, start);
+
+			return start == -1 ? null : str.Substring(start, end - start);
+		}
+
+		public static string Start(this string str, int numChars)
+		{
+			if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
+
+			return str.Substring(0, numChars);
+		}
+
+		public static string TryStart(this string str, int numChars)
+		{
+			if (str == null) return null;
+
+			return numChars > str.Length ? str : str.Substring(0, numChars);
+		}
+
+		public static string End(this string str, int numChars)
+		{
+			if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
+
+			return str.Substring(str.Length - numChars, numChars);
+		}
+
+		public static string TryEnd(this string str, int numChars)
+		{
+			if (str == null) return null;
+
+			return numChars > str.Length ? str : str.Substring(str.Length - numChars, numChars);
+		}
+
+		public static string RemoveStart(this string str, int numChars)
+		{
+			if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
+
+			return str.Substring(numChars);
+		}
+
+		public static string TryRemoveStart(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(numChars); }
+
+		public static string RemoveEnd(this string str, int numChars)
+		{
+			if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
+
+			return str.Substring(0, str.Length - numChars);
+		}
+
+		public static string TryRemoveEnd(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars); }
+
+		public static List<string> SplitInGroupsOf(this string str, int maxChars)
+		{
+			if (string.IsNullOrEmpty(str)) return new List<string>();
+
+			if (maxChars <= 0) throw new ArgumentOutOfRangeException($"{nameof(maxChars)} should be greater than 0");
+
+			var result = new List<string>();
+
+			for (var i = 0; i < str.Length; i += maxChars)
+			{
+				result.Add(i + maxChars < str.Length ? str.Substring(i, maxChars) : str.Substring(i));
+			}
+
+			return result;
+		}
+
+		public static string PadChopRight(this string str, int length)
+		{
+			str = str ?? string.Empty;
+
+			return str.Length > length ? str.Substring(0, length) : str.PadRight(length);
+		}
+
+		public static string PadChopLeft(this string str, int length)
+		{
+			str = str ?? string.Empty;
+
+			return str.Length > length ? str.Substring(str.Length - length, length) : str.PadLeft(length);
+		}
+
+		public static string[] Lines(this string str)
+		{
+			if (!str.HasText()) return new string[0];
+
+			return str.Split(new[] {"\r\n", "\n"}, StringSplitOptions.None);
 		}
 	}
 }

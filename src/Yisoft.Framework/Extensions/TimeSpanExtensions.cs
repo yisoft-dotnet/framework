@@ -14,28 +14,17 @@
 // -------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Newtonsoft.Json.Linq;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class DictionaryExtensions
+	public static class TimeSpanExtensions
 	{
-		public static void AddDictionary(this JObject jobject, Dictionary<string, object> dictionary)
-		{
-			foreach (var item in dictionary)
-			{
-				JToken token;
+		public static TimeSpan TrimToSeconds(this TimeSpan time) { return new TimeSpan(time.Days, time.Hours, time.Minutes, time.Seconds); }
 
-				if (jobject.TryGetValue(item.Key, out token)) throw new Exception("Item does already exist - cannot add it via a custom entry: " + item.Key);
+		public static TimeSpan TrimToMinutes(this TimeSpan time) { return new TimeSpan(time.Days, time.Hours, time.Minutes, 0); }
 
-				jobject.Add(
-					item.Value.GetType().GetTypeInfo().IsClass
-						? new JProperty(item.Key, JToken.FromObject(item.Value))
-						: new JProperty(item.Key, item.Value)
-				);
-			}
-		}
+		public static TimeSpan TrimToHours(this TimeSpan time) { return new TimeSpan(time.Days, time.Hours, 0, 0); }
+
+		public static TimeSpan TrimToDays(this TimeSpan time) { return new TimeSpan(time.Days, 0, 0, 0); }
 	}
 }

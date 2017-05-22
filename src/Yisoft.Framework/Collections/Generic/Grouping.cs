@@ -13,29 +13,25 @@
 // Copyright © Yi.TEAM. All rights reserved.
 // -------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Linq;
 
-namespace Yisoft.Framework.Extensions
+namespace Yisoft.Framework.Collections.Generic
 {
-	public static class DictionaryExtensions
+	[DebuggerDisplay("Key = {Key}  Count = {Count}")]
+	[DebuggerTypeProxy(typeof(Proxy))]
+	public class Grouping<TKey, T> : List<T>, IGrouping<TKey, T>
 	{
-		public static void AddDictionary(this JObject jobject, Dictionary<string, object> dictionary)
+		public Grouping(TKey key) { Key = key; }
+
+		public Grouping(TKey key, IEnumerable<T> values)
 		{
-			foreach (var item in dictionary)
-			{
-				JToken token;
+			Key = key;
 
-				if (jobject.TryGetValue(item.Key, out token)) throw new Exception("Item does already exist - cannot add it via a custom entry: " + item.Key);
-
-				jobject.Add(
-					item.Value.GetType().GetTypeInfo().IsClass
-						? new JProperty(item.Key, JToken.FromObject(item.Value))
-						: new JProperty(item.Key, item.Value)
-				);
-			}
+			AddRange(values);
 		}
+
+		public TKey Key { get; }
 	}
 }

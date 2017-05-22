@@ -13,29 +13,23 @@
 // Copyright © Yi.TEAM. All rights reserved.
 // -------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Reflection;
-using Newtonsoft.Json.Linq;
 
-namespace Yisoft.Framework.Extensions
+namespace Yisoft.Framework.Collections.Generic
 {
-	public static class DictionaryExtensions
+	internal class Proxy
 	{
-		public static void AddDictionary(this JObject jobject, Dictionary<string, object> dictionary)
+		public object Key;
+		public ArrayList List;
+
+		public Proxy(IList bla)
 		{
-			foreach (var item in dictionary)
-			{
-				JToken token;
+			List = new ArrayList(bla);
 
-				if (jobject.TryGetValue(item.Key, out token)) throw new Exception("Item does already exist - cannot add it via a custom entry: " + item.Key);
+			var pi = bla.GetType().GetTypeInfo().GetProperty("Key");
 
-				jobject.Add(
-					item.Value.GetType().GetTypeInfo().IsClass
-						? new JProperty(item.Key, JToken.FromObject(item.Value))
-						: new JProperty(item.Key, item.Value)
-				);
-			}
+			Key = pi.GetValue(bla, null);
 		}
 	}
 }
