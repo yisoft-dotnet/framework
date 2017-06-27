@@ -4,19 +4,19 @@
 		<Description>dotnet convenient development framework.</Description>
 		<Copyright>Copyright © Yi.TEAM. All rights reserved.</Copyright>
 		<AssemblyTitle>Yisoft.Framework</AssemblyTitle>
-		<VersionPrefix>1.6.0</VersionPrefix>
+		<VersionPrefix>1.6.1</VersionPrefix>
 		<Authors>ymind.chan@yi.team</Authors>
 		<TargetFrameworks>netstandard1.6;net46;</TargetFrameworks>
 		<DebugType>portable</DebugType>
 		<AssemblyName>Yisoft.Framework</AssemblyName>
 		<PackageId>Yisoft.Framework</PackageId>
 		<PackageTags>dotnet;framework;yisoft;yiteam</PackageTags>
-		<PackageIconUrl>https://yi.team/images/yiteam-logo-64x64.png</PackageIconUrl>
 		<PackageProjectUrl>http://yi.team/</PackageProjectUrl>
-		<PackageLicenseUrl>https://yi.team/packages/license.txt</PackageLicenseUrl>
+		<PackageIconUrl>https://static.yi.team/images/yiteam-logo-64x64.png</PackageIconUrl>
+		<PackageLicenseUrl>https://github.com/yisoft-dotnet/framework/blob/master/LICENSE</PackageLicenseUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://bitbucket.org/yisoft/framework</RepositoryUrl>
+		<RepositoryUrl>https://github.com/yisoft-dotnet/framework</RepositoryUrl>
 		<NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
@@ -30,7 +30,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
 		<PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
 		<PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
 		<PackageReference Include="System.Net.Http" Version="4.3.2" />
