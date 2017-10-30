@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -19,20 +19,20 @@ using Newtonsoft.Json;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class HttpResponseMessageExtensions
-	{
-		public static T DeserializeJsonObject<T>(this HttpResponseMessage response)
-		{
-			var data = response.Content.ReadAsStringAsync().Result;
+    public static class HttpResponseMessageExtensions
+    {
+        public static T DeserializeJsonObject<T>(this HttpResponseMessage response)
+        {
+            var data = response.Content.ReadAsStringAsync().Result;
 
-			return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
-		}
+            return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
+        }
 
-		public static async Task<T> DeserializeJsonObjectAsync<T>(this HttpResponseMessage response)
-		{
-			var data = await response.Content.ReadAsStringAsync();
+        public static async Task<T> DeserializeJsonObjectAsync<T>(this HttpResponseMessage response)
+        {
+            var data = await response.Content.ReadAsStringAsync();
 
-			return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
-		}
-	}
+            return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -18,22 +18,19 @@ using System.Text;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class BinaryReaderExtenions
-	{
-		public static string ReadString(this BinaryReader reader, bool endWith0)
-		{
-			if (!endWith0) return reader.ReadString();
+    public static class BinaryReaderExtenions
+    {
+        public static string ReadString(this BinaryReader reader, bool endWith0)
+        {
+            if (!endWith0) return reader.ReadString();
 
-			var contentBuilder = new StringBuilder();
+            var contentBuilder = new StringBuilder();
 
-			char c;
+            char c;
 
-			while ((c = reader.ReadChar()) > char.MinValue)
-			{
-				contentBuilder.Append(c);
-			}
+            while ((c = reader.ReadChar()) > char.MinValue) contentBuilder.Append(c);
 
-			return contentBuilder.ToString();
-		}
-	}
+            return contentBuilder.ToString();
+        }
+    }
 }

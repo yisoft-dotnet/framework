@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -17,20 +17,20 @@ using System.IO;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class BinaryWriterExtensions
-	{
-		public static void Write(this BinaryWriter writer, string value, bool endWith0)
-		{
-			if (!endWith0)
-			{
-				writer.Write(value);
+    public static class BinaryWriterExtensions
+    {
+        public static void Write(this BinaryWriter writer, string value, bool endWith0)
+        {
+            if (!endWith0)
+            {
+                writer.Write(value);
 
-				return;
-			}
+                return;
+            }
 
-			if (!string.IsNullOrEmpty(value)) writer.Write(value.ToCharArray());
+            if (!string.IsNullOrEmpty(value)) writer.Write(value.ToCharArray());
 
-			writer.Write((byte) 0);
-		}
-	}
+            writer.Write((byte) 0);
+        }
+    }
 }

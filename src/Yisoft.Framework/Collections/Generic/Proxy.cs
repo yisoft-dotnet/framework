@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -18,18 +18,18 @@ using System.Reflection;
 
 namespace Yisoft.Framework.Collections.Generic
 {
-	internal class Proxy
-	{
-		public object Key;
-		public ArrayList List;
+    internal class Proxy
+    {
+        public object Key;
+        public ArrayList List;
 
-		public Proxy(IList bla)
-		{
-			List = new ArrayList(bla);
+        public Proxy(IList bla)
+        {
+            List = new ArrayList(bla);
 
-			var pi = bla.GetType().GetTypeInfo().GetProperty("Key");
+            var pi = bla.GetType().GetTypeInfo().GetProperty("Key");
 
-			Key = pi.GetValue(bla, null);
-		}
-	}
+            Key = pi.GetValue(bla, null);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -19,34 +19,36 @@ using System.Text;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class StringBuilderExtensions
-	{
-		public static StringBuilder AppendJoin(
-			this StringBuilder stringBuilder,
-			IEnumerable<string> values,
-			string separator = ", ")
-			=> stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
+    public static class StringBuilderExtensions
+    {
+        public static StringBuilder AppendJoin(
+            this StringBuilder stringBuilder,
+            IEnumerable<string> values,
+            string separator = ", ")
+        {
+            return stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
+        }
 
-		public static StringBuilder AppendJoin<T>(
-			this StringBuilder stringBuilder,
-			IEnumerable<T> values,
-			Action<StringBuilder, T> joinAction,
-			string separator)
-		{
-			var appended = false;
+        public static StringBuilder AppendJoin<T>(
+            this StringBuilder stringBuilder,
+            IEnumerable<T> values,
+            Action<StringBuilder, T> joinAction,
+            string separator)
+        {
+            var appended = false;
 
-			foreach (var value in values)
-			{
-				joinAction(stringBuilder, value);
+            foreach (var value in values)
+            {
+                joinAction(stringBuilder, value);
 
-				stringBuilder.Append(separator);
+                stringBuilder.Append(separator);
 
-				appended = true;
-			}
+                appended = true;
+            }
 
-			if (appended) stringBuilder.Length -= separator.Length;
+            if (appended) stringBuilder.Length -= separator.Length;
 
-			return stringBuilder;
-		}
-	}
+            return stringBuilder;
+        }
+    }
 }
