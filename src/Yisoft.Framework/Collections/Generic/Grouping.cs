@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -19,19 +19,19 @@ using System.Linq;
 
 namespace Yisoft.Framework.Collections.Generic
 {
-	[DebuggerDisplay("Key = {Key}  Count = {Count}")]
-	[DebuggerTypeProxy(typeof(Proxy))]
-	public class Grouping<TKey, T> : List<T>, IGrouping<TKey, T>
-	{
-		public Grouping(TKey key) { Key = key; }
+    [DebuggerDisplay("Key = {Key}  Count = {Count}")]
+    [DebuggerTypeProxy(typeof(Proxy))]
+    public class Grouping<TKey, T> : List<T>, IGrouping<TKey, T>
+    {
+        public Grouping(TKey key) { Key = key; }
 
-		public Grouping(TKey key, IEnumerable<T> values)
-		{
-			Key = key;
+        public Grouping(TKey key, IEnumerable<T> values)
+        {
+            Key = key;
 
-			AddRange(values);
-		}
+            AddRange(values);
+        }
 
-		public TKey Key { get; }
-	}
+        public TKey Key { get; }
+    }
 }

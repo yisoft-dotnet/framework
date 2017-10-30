@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -15,10 +15,10 @@
 
 namespace Yisoft.Framework.Security.Cryptography
 {
-	public interface ITokenEncoder
-	{
-		string Decode(string input);
+    public interface ITokenEncoder
+    {
+        string Decode(string input);
 
-		string Encode(string input);
-	}
+        string Encode(string input);
+    }
 }

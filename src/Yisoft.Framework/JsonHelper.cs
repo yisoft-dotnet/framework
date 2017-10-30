@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -20,22 +20,22 @@ using Yisoft.Framework.Json.Converters;
 
 namespace Yisoft.Framework
 {
-	public static class JsonHelper
-	{
-		public static JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings
-		{
-			DateTimeZoneHandling = DateTimeZoneHandling.Local,
-			ContractResolver = new CamelCasePropertyNamesContractResolver(),
-			NullValueHandling = NullValueHandling.Ignore,
-			MissingMemberHandling = MissingMemberHandling.Ignore,
-			ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-			Converters = new List<JsonConverter>
-			{
-				new ExtraEnumConverter
-				{
-					CamelCaseText = true
-				}
-			}
-		};
-	}
+    public static class JsonHelper
+    {
+        public static JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings
+        {
+            DateTimeZoneHandling = DateTimeZoneHandling.Local,
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            NullValueHandling = NullValueHandling.Ignore,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Converters = new List<JsonConverter>
+            {
+                new ExtraEnumConverter
+                {
+                    CamelCaseText = true
+                }
+            }
+        };
+    }
 }

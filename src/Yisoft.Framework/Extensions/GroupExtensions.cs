@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -20,37 +20,34 @@ using Yisoft.Framework.Collections.Generic;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class GroupExtensions
-	{
-		public static IEnumerable<IGrouping<TKey, T>> GroupWhenChange<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> getGroupKey)
-		{
-			Grouping<TKey, T> current = null;
+    public static class GroupExtensions
+    {
+        public static IEnumerable<IGrouping<TKey, T>> GroupWhenChange<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> getGroupKey)
+        {
+            Grouping<TKey, T> current = null;
 
-			foreach (var item in collection)
-			{
-				if (current == null)
-				{
-					current = new Grouping<TKey, T>(getGroupKey(item))
-					{
-						item
-					};
-				}
-				else if (current.Key.Equals(getGroupKey(item)))
-				{
-					current.Add(item);
-				}
-				else
-				{
-					yield return current;
+            foreach (var item in collection)
+            {
+                if (current == null)
+                {
+                    current = new Grouping<TKey, T>(getGroupKey(item))
+                    {
+                        item
+                    };
+                }
+                else if (current.Key.Equals(getGroupKey(item))) current.Add(item);
+                else
+                {
+                    yield return current;
 
-					current = new Grouping<TKey, T>(getGroupKey(item))
-					{
-						item
-					};
-				}
-			}
+                    current = new Grouping<TKey, T>(getGroupKey(item))
+                    {
+                        item
+                    };
+                }
+            }
 
-			if (current != null) yield return current;
-		}
-	}
+            if (current != null) yield return current;
+        }
+    }
 }
