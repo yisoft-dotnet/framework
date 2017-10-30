@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -22,60 +22,60 @@ using Yisoft.Framework.Extensions;
 
 namespace Yisoft.Framework.Net.Http
 {
-	public abstract partial class RestfulClientBase
-	{
-		protected Task<T> PutAsync<T>(
-			Uri uri,
-			object data,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			return PutAsync<T>(uri, data, Encoding.UTF8, addHeadersAction);
-		}
+    public abstract partial class RestfulClientBase
+    {
+        protected Task<T> PutAsync<T>(
+            Uri uri,
+            object data,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            return PutAsync<T>(uri, data, Encoding.UTF8, addHeadersAction);
+        }
 
-		protected async Task<T> PutAsync<T>(
-			Uri uri,
-			object data,
-			Encoding encoding,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			var response = await PutAsync(uri, data, encoding, addHeadersAction);
+        protected async Task<T> PutAsync<T>(
+            Uri uri,
+            object data,
+            Encoding encoding,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            var response = await PutAsync(uri, data, encoding, addHeadersAction);
 
-			return await response.DeserializeJsonObjectAsync<T>();
-		}
+            return await response.DeserializeJsonObjectAsync<T>();
+        }
 
-		protected async Task<T> PutAsync<T>(
-			Uri uri,
-			HttpContent content,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			var response = await PutAsync(uri, content, addHeadersAction);
+        protected async Task<T> PutAsync<T>(
+            Uri uri,
+            HttpContent content,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            var response = await PutAsync(uri, content, addHeadersAction);
 
-			return await response.DeserializeJsonObjectAsync<T>();
-		}
+            return await response.DeserializeJsonObjectAsync<T>();
+        }
 
-		protected Task<HttpResponseMessage> PutAsync(
-			Uri uri,
-			object data,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			return PutAsync(uri, data, Encoding.UTF8, addHeadersAction);
-		}
+        protected Task<HttpResponseMessage> PutAsync(
+            Uri uri,
+            object data,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            return PutAsync(uri, data, Encoding.UTF8, addHeadersAction);
+        }
 
-		protected async Task<HttpResponseMessage> PutAsync(
-			Uri uri,
-			object data,
-			Encoding encoding,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			return await SendAsync(uri, HttpMethod.Put, data, encoding, addHeadersAction);
-		}
+        protected async Task<HttpResponseMessage> PutAsync(
+            Uri uri,
+            object data,
+            Encoding encoding,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            return await SendAsync(uri, HttpMethod.Put, data, encoding, addHeadersAction);
+        }
 
-		protected async Task<HttpResponseMessage> PutAsync(
-			Uri uri,
-			HttpContent content,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			return await SendAsync(uri, HttpMethod.Put, content, addHeadersAction);
-		}
-	}
+        protected async Task<HttpResponseMessage> PutAsync(
+            Uri uri,
+            HttpContent content,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            return await SendAsync(uri, HttpMethod.Put, content, addHeadersAction);
+        }
+    }
 }

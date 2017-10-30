@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -21,22 +21,22 @@ using Yisoft.Framework.Extensions;
 
 namespace Yisoft.Framework.Net.Http
 {
-	public abstract partial class RestfulClientBase
-	{
-		protected async Task<HttpResponseMessage> GetAsync(
-			Uri uri,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			return await SendAsync(uri, HttpMethod.Get, null, addHeadersAction, HttpCompletionOption.ResponseHeadersRead);
-		}
+    public abstract partial class RestfulClientBase
+    {
+        protected async Task<HttpResponseMessage> GetAsync(
+            Uri uri,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            return await SendAsync(uri, HttpMethod.Get, null, addHeadersAction, HttpCompletionOption.ResponseHeadersRead);
+        }
 
-		protected async Task<T> GetAsync<T>(
-			Uri uri,
-			Action<HttpRequestHeaders> addHeadersAction = null)
-		{
-			var response = await GetAsync(uri, addHeadersAction);
+        protected async Task<T> GetAsync<T>(
+            Uri uri,
+            Action<HttpRequestHeaders> addHeadersAction = null)
+        {
+            var response = await GetAsync(uri, addHeadersAction);
 
-			return await response.DeserializeJsonObjectAsync<T>();
-		}
-	}
+            return await response.DeserializeJsonObjectAsync<T>();
+        }
+    }
 }

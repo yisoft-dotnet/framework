@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -15,12 +15,12 @@
 
 namespace Yisoft.Framework.IntelligentAlgorithms
 {
-	public enum ChoiceType
-	{
-		Equal,
-		Substitute,
-		Remove,
-		Add,
-		Transpose
-	}
+    public enum ChoiceType
+    {
+        Equal,
+        Substitute,
+        Remove,
+        Add,
+        Transpose
+    }
 }

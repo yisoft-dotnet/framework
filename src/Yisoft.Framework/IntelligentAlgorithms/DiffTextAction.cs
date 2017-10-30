@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -15,11 +15,11 @@
 
 namespace Yisoft.Framework.IntelligentAlgorithms
 {
-	public enum DiffTextAction
-	{
-		Equal,
-		Added,
-		Removed,
-		Changed
-	}
+    public enum DiffTextAction
+    {
+        Equal,
+        Added,
+        Removed,
+        Changed
+    }
 }

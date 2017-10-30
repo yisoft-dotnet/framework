@@ -1,4 +1,4 @@
-﻿//      )                             *     
+//      )                             *     
 //   ( /(        *   )       (      (  `    
 //   )\()) (   ` )  /( (     )\     )\))(   
 //  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
@@ -21,51 +21,48 @@ using Newtonsoft.Json.Linq;
 
 namespace Yisoft.Framework.Extensions
 {
-	public static class JsonExtensions
-	{
-		public static string ToQueryString(this JToken jToken, bool escape = true)
-		{
-			var jValues = new SortedList<string, string>();
-			var builder = new StringBuilder();
+    public static class JsonExtensions
+    {
+        public static string ToQueryString(this JToken jToken, bool escape = true)
+        {
+            var jValues = new SortedList<string, string>();
+            var builder = new StringBuilder();
 
-			_FetchValues(jToken, jValues, escape);
+            _FetchValues(jToken, jValues, escape);
 
-			foreach (var p in jValues)
-			{
-				builder.Append('&');
-				builder.Append(p.Key);
-				builder.Append('=');
-				builder.Append(p.Value);
-			}
+            foreach (var p in jValues)
+            {
+                builder.Append('&');
+                builder.Append(p.Key);
+                builder.Append('=');
+                builder.Append(p.Value);
+            }
 
-			return builder.Length > 0 ? builder.Remove(0, 1).ToString() : builder.ToString();
-		}
+            return builder.Length > 0 ? builder.Remove(0, 1).ToString() : builder.ToString();
+        }
 
-		private static void _FetchValues(JToken jToken, SortedList<string, string> jValues, bool escape)
-		{
-			foreach (var token in jToken.Children())
-			{
-				var jValue = token as JValue;
+        private static void _FetchValues(JToken jToken, SortedList<string, string> jValues, bool escape)
+        {
+            foreach (var token in jToken.Children())
+            {
+                if (!(token is JValue jValue)) _FetchValues(token, jValues, escape);
+                else
+                {
+                    var jvalue = jValue.Value.ToString();
 
-				if (jValue == null)
-				{
-					_FetchValues(token, jValues, escape);
-				}
-				else
-				{
-					if (string.IsNullOrEmpty(jValue.Value?.ToString())) continue;
+                    if (string.IsNullOrEmpty(jvalue)) continue;
 
-					var key = escape ? Uri.EscapeUriString(jValue.Path) : jValue.Path;
-					var value = escape ? Uri.EscapeUriString(jValue.Value.ToString()) : jValue.Value.ToString();
+                    var key = escape ? Uri.EscapeUriString(jValue.Path) : jValue.Path;
+                    var value = escape ? Uri.EscapeUriString(jvalue) : jvalue;
 
-					jValues.Add(key, value);
-				}
-			}
-		}
+                    jValues.Add(key, value);
+                }
+            }
+        }
 
-		public static string ToJson(this object obj, Formatting formatting = Formatting.None, JsonSerializerSettings settings = null)
-		{
-			return JsonConvert.SerializeObject(obj, formatting, settings ?? JsonHelper.DefaultJsonSerializerSettings);
-		}
-	}
+        public static string ToJson(this object obj, Formatting formatting = Formatting.None, JsonSerializerSettings settings = null)
+        {
+            return JsonConvert.SerializeObject(obj, formatting, settings ?? JsonHelper.DefaultJsonSerializerSettings);
+        }
+    }
 }
