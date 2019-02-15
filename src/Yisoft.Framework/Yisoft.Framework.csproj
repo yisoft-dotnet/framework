@@ -7,17 +7,14 @@
         <VersionPrefix>2.2.0</VersionPrefix>
         <Authors>ymind.chan@yi.team</Authors>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <DebugType>portable</DebugType>
         <AssemblyName>Yisoft.Framework</AssemblyName>
         <PackageId>Yisoft.Framework</PackageId>
         <PackageTags>dotnet;framework;yisoft;yiteam</PackageTags>
-        <PackageProjectUrl>http://yi.team/</PackageProjectUrl>
+        <PackageProjectUrl>https://yi.team/</PackageProjectUrl>
         <PackageIconUrl>https://static.yi.team/images/yiteam-logo-64x64.png</PackageIconUrl>
         <PackageLicenseUrl>https://github.com/yisoft-dotnet/framework/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/yisoft-dotnet/framework</RepositoryUrl>
-        <SignAssembly>False</SignAssembly>
-        <AssemblyOriginatorKeyFile>../../tools/yiteam.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
