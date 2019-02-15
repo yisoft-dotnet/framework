@@ -62,20 +62,14 @@ namespace Yisoft.Framework.Collections.Generic
             ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).CopyTo(array, arrayIndex);
         }
 
-        public bool ContainsKey(TKey key)
-        {
-            return _keysToValues.ContainsKey(key);
-        }
+        public bool ContainsKey(TKey key) { return _keysToValues.ContainsKey(key); }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
         {
             return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item);
         }
 
-        public bool TryGetValue(TKey key, out TValue value)
-        {
-            return _keysToValues.TryGetValue(key, out value);
-        }
+        public bool TryGetValue(TKey key, out TValue value) { return _keysToValues.TryGetValue(key, out value); }
 
         public TValue this[TKey key]
         {
