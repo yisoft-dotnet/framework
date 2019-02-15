@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Linq;
@@ -32,10 +22,7 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="enum">枚举值。</param>
         /// <returns>返回 <see cref="EnumExtraAttribute"/> 对象的实例。</returns>
-        public static EnumExtraAttribute GetDescription(this Enum @enum)
-        {
-            return GetDescription<EnumExtraAttribute>(@enum);
-        }
+        public static EnumExtraAttribute GetDescription(this Enum @enum) { return GetDescription<EnumExtraAttribute>(@enum); }
 
         /// <summary>
         /// 返回当前枚举值描述特性的实例。
@@ -95,20 +82,14 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="enum">枚举值。</param>
         /// <returns>返回 <see cref="int"/>。</returns>
-        public static int ToInt32(this Enum @enum)
-        {
-            return Convert.ToInt32(@enum);
-        }
+        public static int ToInt32(this Enum @enum) { return Convert.ToInt32(@enum); }
 
         /// <summary>
         /// 返回当前枚举值的数字值。
         /// </summary>
         /// <param name="enum">枚举值。</param>
         /// <returns>返回 <see cref="long"/>。</returns>
-        public static long ToInt64(this Enum @enum)
-        {
-            return Convert.ToInt64(@enum);
-        }
+        public static long ToInt64(this Enum @enum) { return Convert.ToInt64(@enum); }
 
         public static EnumExtraInfo GetExtra(this Enum @enum)
         {

@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Text;
@@ -54,10 +44,7 @@ namespace Yisoft.Framework.Utilities
         /// <param name="length">指定要生成的随机字符串的长度。</param>
         /// <param name="custom">指定要生成的随机字符串要包含的自定义字符序列。</param>
         /// <returns>指定长度的随机字符串。</returns>
-        public static string GetRandString(int length, string custom)
-        {
-            return GetRandString(length, RandomSeeds.Custom, custom);
-        }
+        public static string GetRandString(int length, string custom) { return GetRandString(length, RandomSeeds.Custom, custom); }
 
         /// <summary>
         /// 返回一个指定位数的随机数字。
