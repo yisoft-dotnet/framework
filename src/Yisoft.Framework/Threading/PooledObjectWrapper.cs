@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 
@@ -52,17 +42,11 @@ namespace Yisoft.Framework.Threading
         /// <summary>
         /// 在释放对象时发生。
         /// </summary>
-        protected override void OnRelease()
-        {
-            WrapperReleaseResourcesAction?.Invoke(InternalResource);
-        }
+        protected override void OnRelease() { WrapperReleaseResourcesAction?.Invoke(InternalResource); }
 
         /// <summary>
         /// 在重置对象状态时发生。
         /// </summary>
-        protected override void OnReset()
-        {
-            WrapperResetStateAction?.Invoke(InternalResource);
-        }
+        protected override void OnReset() { WrapperResetStateAction?.Invoke(InternalResource); }
     }
 }

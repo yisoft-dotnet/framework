@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Text;
@@ -106,10 +96,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// </summary>
         /// <param name="other">与此对象进行比较的对象。</param>
         /// <returns>如果当前对象等于 <paramref name="other"/> 参数，则为 true；否则为 false。</returns>
-        public bool Equals(LevenshteinDistanceResult other)
-        {
-            return String1.Equals(other.String1) && String2.Equals(other.String2);
-        }
+        public bool Equals(LevenshteinDistanceResult other) { return String1.Equals(other.String1) && String2.Equals(other.String2); }
 
         #endregion
 
@@ -118,19 +105,13 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// </summary>
         /// <param name="obj">要与当前对象进行比较的对象。</param>
         /// <returns>如果指定的 <see cref="LevenshteinDistanceResult"/> 等于当前的 <see cref="LevenshteinDistanceResult"/>，则为 true；否则为 false。</returns>
-        public override bool Equals(object obj)
-        {
-            return obj is LevenshteinDistanceResult && Equals((LevenshteinDistanceResult) obj);
-        }
+        public override bool Equals(object obj) { return obj is LevenshteinDistanceResult && Equals((LevenshteinDistanceResult) obj); }
 
         /// <summary>
         /// 返回当前对象的哈希代码。
         /// </summary>
         /// <returns>当前 <see cref="LevenshteinDistanceResult"/> 的哈希代码。</returns>
-        public override int GetHashCode()
-        {
-            return (String1 + String2).GetHashCode();
-        }
+        public override int GetHashCode() { return (String1 + String2).GetHashCode(); }
 
         /// <summary>
         /// 返回表示当前对象的字符串。

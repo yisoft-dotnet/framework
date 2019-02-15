@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Concurrent;
@@ -40,29 +30,20 @@ namespace Yisoft.Framework.Threading
         /// <summary>
         /// 初始化 <see cref="ObjectPool{T}"/> 类的新实例。
         /// </summary>
-        public ObjectPool()
-        {
-            _InitializePool(_DEFAULT_POOL_MINIMUM_SIZE, _DEFAULT_POOL_MAXIMUM_SIZE, null);
-        }
+        public ObjectPool() { _InitializePool(_DEFAULT_POOL_MINIMUM_SIZE, _DEFAULT_POOL_MAXIMUM_SIZE, null); }
 
         /// <summary>
         /// 初始化 <see cref="ObjectPool{T}"/> 类的新实例。
         /// </summary>
         /// <param name="minimumPoolSize">对象池的最小容量。</param>
         /// <param name="maximumPoolSize">对象池的最大容量。</param>
-        public ObjectPool(int minimumPoolSize, int maximumPoolSize)
-        {
-            _InitializePool(minimumPoolSize, maximumPoolSize, null);
-        }
+        public ObjectPool(int minimumPoolSize, int maximumPoolSize) { _InitializePool(minimumPoolSize, maximumPoolSize, null); }
 
         /// <summary>
         /// 初始化 <see cref="ObjectPool{T}"/> 类的新实例。
         /// </summary>
         /// <param name="factoryMethod">创建对象实例的方法。</param>
-        public ObjectPool(Func<T> factoryMethod)
-        {
-            _InitializePool(_DEFAULT_POOL_MINIMUM_SIZE, _DEFAULT_POOL_MAXIMUM_SIZE, factoryMethod);
-        }
+        public ObjectPool(Func<T> factoryMethod) { _InitializePool(_DEFAULT_POOL_MINIMUM_SIZE, _DEFAULT_POOL_MAXIMUM_SIZE, factoryMethod); }
 
         /// <summary>
         /// 初始化 <see cref="ObjectPool{T}"/> 类的新实例。
@@ -70,10 +51,7 @@ namespace Yisoft.Framework.Threading
         /// <param name="minimumPoolSize">对象池的最小容量。</param>
         /// <param name="maximumPoolSize">对象池的最大容量。</param>
         /// <param name="factoryMethod">创建对象实例的方法。</param>
-        public ObjectPool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod)
-        {
-            _InitializePool(minimumPoolSize, maximumPoolSize, factoryMethod);
-        }
+        public ObjectPool(int minimumPoolSize, int maximumPoolSize, Func<T> factoryMethod) { _InitializePool(minimumPoolSize, maximumPoolSize, factoryMethod); }
 
         /// <summary>
         /// 获取对象池性能计数器的实例。

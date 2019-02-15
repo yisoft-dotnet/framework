@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Text.RegularExpressions;
@@ -72,10 +62,7 @@ namespace Yisoft.Framework
         /// </summary>
         /// <param name="formatType">一个对象，该对象指定要返回的格式对象的类型。</param>
         /// <returns>如果 <see cref="System.IFormatProvider"/> 实现能够提供该类型的对象，则为 formatType 所指定对象的实例；否则为 null。</returns>
-        public object GetFormat(Type formatType)
-        {
-            return formatType != null && formatType == typeof(ICustomFormatter) ? this : null;
-        }
+        public object GetFormat(Type formatType) { return formatType != null && formatType == typeof(ICustomFormatter) ? this : null; }
 
         #endregion
 

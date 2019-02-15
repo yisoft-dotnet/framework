@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System.Collections;
 using System.Collections.Generic;
@@ -71,7 +61,9 @@ namespace Yisoft.Framework.Utilities
         public Hasher HashElements(IEnumerable sequence)
         {
             if (sequence == null) _hashCode = 37 * _hashCode + -1;
-            else foreach (var value in sequence) _hashCode = 37 * _hashCode + (value?.GetHashCode() ?? -1);
+            else
+                foreach (var value in sequence)
+                    _hashCode = 37 * _hashCode + (value?.GetHashCode() ?? -1);
 
             return this;
         }

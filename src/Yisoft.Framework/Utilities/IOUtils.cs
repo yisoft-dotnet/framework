@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Diagnostics;
@@ -56,10 +46,7 @@ namespace Yisoft.Framework.Utilities
         /// </summary>
         /// <param name="path">要检查的文件夹的物理路径。</param>
         /// <returns>bool</returns>
-        public static bool Exists(string path)
-        {
-            return Directory.Exists(path);
-        }
+        public static bool Exists(string path) { return Directory.Exists(path); }
 
         /// <summary>
         /// 确定指定的文件夹是否存在，如果存在则检查其创建时间是否已经过期。
@@ -78,20 +65,14 @@ namespace Yisoft.Framework.Utilities
         /// <param name="path">要检查的文件夹的物理路径。</param>
         /// <param name="expires">过期时间。</param>
         /// <returns>如果文件夹不存在或文件夹已经过期则返回 false 。</returns>
-        public static bool Exists(string path, TimeSpan expires)
-        {
-            return Exists(path, (int) expires.TotalSeconds);
-        }
+        public static bool Exists(string path, TimeSpan expires) { return Exists(path, (int) expires.TotalSeconds); }
 
         /// <summary>
         /// 确定指定的文件是否存在。
         /// </summary>
         /// <param name="path">要检查的文件夹的物理路径。</param>
         /// <returns>bool</returns>
-        public static bool FileExists(string path)
-        {
-            return File.Exists(path);
-        }
+        public static bool FileExists(string path) { return File.Exists(path); }
 
         /// <summary>
         /// 确定指定的文件是否存在，如果存在则检查其创建时间是否已经过期。
@@ -110,20 +91,14 @@ namespace Yisoft.Framework.Utilities
         /// <param name="path">要检查的文件的物理路径。</param>
         /// <param name="expires">过期时间。</param>
         /// <returns>如果文件不存在或文件已经过期则返回 false 。</returns>
-        public static bool FileExists(string path, TimeSpan expires)
-        {
-            return FileExists(path, (int) expires.TotalSeconds);
-        }
+        public static bool FileExists(string path, TimeSpan expires) { return FileExists(path, (int) expires.TotalSeconds); }
 
         /// <summary>
         /// 将现有文件复制到新文件。覆盖同名的文件。
         /// </summary>
         /// <param name="sourceFileName">要复制的文件。</param>
         /// <param name="destFileName">目标文件的名称。不能是目录。</param>
-        public static void CopyFile(string sourceFileName, string destFileName)
-        {
-            CopyFile(sourceFileName, destFileName, true);
-        }
+        public static void CopyFile(string sourceFileName, string destFileName) { CopyFile(sourceFileName, destFileName, true); }
 
         /// <summary>
         /// 将现有文件复制到新文件。允许覆盖同名的文件。
@@ -150,10 +125,7 @@ namespace Yisoft.Framework.Utilities
         /// </summary>
         /// <param name="path">要移除的目录的名称。</param>
         /// <returns>如果成功删除了指定的目录则返回 true，如果删除失败或发生异常则返回 false。</returns>
-        public static bool DeleteDirectory(string path)
-        {
-            return DeleteDirectory(path, true);
-        }
+        public static bool DeleteDirectory(string path) { return DeleteDirectory(path, true); }
 
         /// <summary>
         /// 删除指定的目录并（如果指示）删除该目录中的任何子目录。
@@ -260,20 +232,14 @@ namespace Yisoft.Framework.Utilities
         /// </summary>
         /// <param name="path">虚拟路径</param>
         /// <returns>虚拟路径中引用的目录。</returns>
-        public static string GetDirectoryPath(string path)
-        {
-            return Regex.Replace(path.Replace("\\", "/"), "[^/]+?$", string.Empty, _REGEX_OPTIONS);
-        }
+        public static string GetDirectoryPath(string path) { return Regex.Replace(path.Replace("\\", "/"), "[^/]+?$", string.Empty, _REGEX_OPTIONS); }
 
         /// <summary>
         /// 返回指定路径字符串的目录信息。
         /// </summary>
         /// <param name="path">文件或目录的路径。</param>
         /// <returns>包含 path 目录信息的 System.String；或者为 null（如果 path 表示根目录、是空字符串 ("") 或是 null）。如果 path 没有包含目录信息，则返回 System.String.Empty。</returns>
-        public static string GetDirectoryName(string path)
-        {
-            return Path.GetDirectoryName(path);
-        }
+        public static string GetDirectoryName(string path) { return Path.GetDirectoryName(path); }
 
         /// <summary>
         /// 将一个基路径和一个相对路径进行组合。

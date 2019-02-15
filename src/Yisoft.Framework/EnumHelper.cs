@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -39,10 +29,7 @@ namespace Yisoft.Framework
         /// <typeparam name="T">指定表示枚举值的 <see cref="System.Type"/>。</typeparam>
         /// <param name="str">表示枚举项的字符串。</param>
         /// <returns>返回类型为 <typeparamref name="T"/> 的枚举值。</returns>
-        public static T GetEnum<T>(string str)
-        {
-            return (T) Enum.Parse(typeof(T), str, true);
-        }
+        public static T GetEnum<T>(string str) { return (T) Enum.Parse(typeof(T), str, true); }
 
         public static HashSet<T> GetEnumFields<T>()
         {

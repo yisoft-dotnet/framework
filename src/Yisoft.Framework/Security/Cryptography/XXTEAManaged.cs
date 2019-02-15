@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -28,10 +18,7 @@ namespace Yisoft.Framework.Security.Cryptography
         /// 使用密钥初始化 XXTEA 算法。
         /// </summary>
         /// <param name="key">要使用的密钥。</param>
-        public XXTEAManaged(string key)
-        {
-            Key = key;
-        }
+        public XXTEAManaged(string key) { Key = key; }
 
         /// <summary>
         /// 获取或设置加密算法使用的密钥。

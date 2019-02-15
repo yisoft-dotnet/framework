@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -71,9 +61,9 @@ namespace Yisoft.Framework.IntelligentAlgorithms
                         );
 
                         if (allowTransposition && i > 1
-                            && j > 1
-                            && comparer.Equals(strOld[i - 1], strNew[j - 2])
-                            && comparer.Equals(strOld[i - 2], strNew[j - 1]))
+                                               && j > 1
+                                               && comparer.Equals(strOld[i - 1], strNew[j - 2])
+                                               && comparer.Equals(strOld[i - 2], strNew[j - 1]))
                             _num[i, j] = Math.Min(_num[i, j],
                                 _num[i - 2, j - 2] + weight(Choice<T>.Transpose(strOld[i - 1], strOld[i - 2])));
                     }
