@@ -64,9 +64,7 @@ namespace Yisoft.Framework.Collections.Generic
 
         public bool ContainsKey(TKey key)
         {
-            return key == null
-                ? throw new ArgumentNullException(nameof(key))
-                : _keysToValues.ContainsKey(key);
+            return _keysToValues.ContainsKey(key);
         }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
@@ -76,9 +74,7 @@ namespace Yisoft.Framework.Collections.Generic
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            return key == null
-                ? throw new ArgumentNullException(nameof(key))
-                : _keysToValues.TryGetValue(key, out value);
+            return _keysToValues.TryGetValue(key, out value);
         }
 
         public TValue this[TKey key]

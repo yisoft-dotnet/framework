@@ -105,7 +105,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// </summary>
         /// <param name="obj">要与当前对象进行比较的对象。</param>
         /// <returns>如果指定的 <see cref="LevenshteinDistanceResult"/> 等于当前的 <see cref="LevenshteinDistanceResult"/>，则为 true；否则为 false。</returns>
-        public override bool Equals(object obj) { return obj is LevenshteinDistanceResult && Equals((LevenshteinDistanceResult) obj); }
+        public override bool Equals(object obj) { return obj is LevenshteinDistanceResult result && Equals(result); }
 
         /// <summary>
         /// 返回当前对象的哈希代码。

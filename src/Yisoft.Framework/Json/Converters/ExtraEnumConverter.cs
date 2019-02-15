@@ -72,16 +72,24 @@ namespace Yisoft.Framework.Json.Converters
             var isNullable = objectType.GetTypeInfo().IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
             var enumType = isNullable ? Nullable.GetUnderlyingType(objectType) : objectType;
 
-            if (enumName != null) return Enum.Parse(enumType, enumName, true);
+            if (enumType == null) return null;
 
-            return enumValue == null ? null : Enum.ToObject(enumType, enumValue);
+            switch (enumName)
+            {
+                case null when enumValue == null:
+                    return null;
+                case null:
+                    return Enum.ToObject(enumType, enumValue);
+                default:
+                    return Enum.Parse(enumType, enumName, true);
+            }
         }
 
         private string _FormatText(string text)
         {
             if (text == null) return null;
 
-            return CamelCaseText ? text.ToCamelCase() : text;
+            return NamingStrategy == null ? text : NamingStrategy.GetPropertyName(text, false);
         }
     }
 }

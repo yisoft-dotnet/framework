@@ -19,7 +19,7 @@ namespace Yisoft.Framework.Collections.Generic
 
             var pi = bla.GetType().GetTypeInfo().GetProperty("Key");
 
-            Key = pi.GetValue(bla, null);
+            Key = pi?.GetValue(bla, null);
         }
     }
 }

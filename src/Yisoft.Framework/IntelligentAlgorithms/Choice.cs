@@ -36,11 +36,16 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         {
             switch (Type)
             {
-                case ChoiceType.Equal: return $"{Added}";
-                case ChoiceType.Substitute: return $"[-{Removed}+{Added}]";
-                case ChoiceType.Remove: return $"-{Removed}";
-                case ChoiceType.Add: return $"+{Added}";
-                default: return null;
+                case ChoiceType.Equal:
+                    return $"{Added}";
+                case ChoiceType.Substitute:
+                    return $"[-{Removed}+{Added}]";
+                case ChoiceType.Remove:
+                    return $"-{Removed}";
+                case ChoiceType.Add:
+                    return $"+{Added}";
+                default:
+                    return string.Empty;
             }
         }
     }

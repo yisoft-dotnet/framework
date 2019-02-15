@@ -23,7 +23,7 @@ namespace Yisoft.Framework
             {
                 new ExtraEnumConverter
                 {
-                    CamelCaseText = true
+                    NamingStrategy = new CamelCaseNamingStrategy()
                 }
             }
         };

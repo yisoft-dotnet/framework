@@ -16,8 +16,15 @@ namespace Yisoft.Framework.Utilities
             PropertyInfo propertyInfo = null;
             var body = property.Body;
 
-            if (body is MemberExpression) propertyInfo = (body as MemberExpression).Member as PropertyInfo;
-            else if (body is UnaryExpression) propertyInfo = ((MemberExpression) ((UnaryExpression) body).Operand).Member as PropertyInfo;
+            switch (body)
+            {
+                case MemberExpression memberExpression:
+                    propertyInfo = memberExpression.Member as PropertyInfo;
+                    break;
+                case UnaryExpression unaryExpression:
+                    propertyInfo = ((MemberExpression) unaryExpression.Operand).Member as PropertyInfo;
+                    break;
+            }
 
             if (propertyInfo == null) throw new ArgumentException("The lambda expression 'property' should point to a valid Property");
 
@@ -29,8 +36,15 @@ namespace Yisoft.Framework.Utilities
             PropertyInfo propertyInfo = null;
             var body = property.Body;
 
-            if (body is MemberExpression) propertyInfo = (body as MemberExpression).Member as PropertyInfo;
-            else if (body is UnaryExpression) propertyInfo = ((MemberExpression) ((UnaryExpression) body).Operand).Member as PropertyInfo;
+            switch (body)
+            {
+                case MemberExpression memberExpression:
+                    propertyInfo = memberExpression.Member as PropertyInfo;
+                    break;
+                case UnaryExpression unaryExpression:
+                    propertyInfo = ((MemberExpression) unaryExpression.Operand).Member as PropertyInfo;
+                    break;
+            }
 
             if (propertyInfo == null) throw new ArgumentException("The lambda expression 'property' should point to a valid Property");
 
