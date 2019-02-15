@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Description>dotnet convenient development framework.</Description>
         <Copyright>Copyright © Yi.TEAM. All rights reserved.</Copyright>
         <AssemblyTitle>Yisoft.Framework</AssemblyTitle>
-        <VersionPrefix>2.2.0</VersionPrefix>
+        <VersionPrefix>2.2.1</VersionPrefix>
         <Authors>ymind.chan@yi.team</Authors>
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Yisoft.Framework</AssemblyName>
