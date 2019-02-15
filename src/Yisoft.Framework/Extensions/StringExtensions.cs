@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -37,15 +27,13 @@ namespace Yisoft.Framework.Extensions
         /// 表示 IP 地址的正则表达式模式的字符串。
         /// </summary>
         public const string IP_ADDRESS_PATTERN =
-                @"(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])"
-            ;
+            @"(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])";
 
         /// <summary>
         /// 表示 Uri 地址的正则表达式模式的字符串。
         /// </summary>
         public const string URI_PATTERN =
-                @"^((https|http|ftp|rtsp|mms)?://)?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}\.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.[a-z]{2,6})(:[0-9]{1,4})?((/?)|(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$"
-            ;
+            @"^((https|http|ftp|rtsp|mms)?://)?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}\.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.[a-z]{2,6})(:[0-9]{1,4})?((/?)|(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
 
         /// <summary>
         /// 验证给定的字符串是否与指定的正则表达式相匹配。
@@ -66,90 +54,63 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合电子信箱地址的规则则返回 true，否则返回 false。</returns>
-        public static bool IsEmail(this string s)
-        {
-            return s.IsMatch(EMAIL_PATTERN);
-        }
+        public static bool IsEmail(this string s) { return s.IsMatch(EMAIL_PATTERN); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆手机号码规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆手机号码规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaMobilePhoneNumber(this string s)
-        {
-            return s.Length == 11 && s[0] == '1' && s.IsNumberOnly();
-        }
+        public static bool IsChinaMobilePhoneNumber(this string s) { return s.Length == 11 && s[0] == '1' && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆邮政编码规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆邮政编码规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaPostalCode(this string s)
-        {
-            return (s.Length == 5 || s.Length == 6) && s.IsNumberOnly();
-        }
+        public static bool IsChinaPostalCode(this string s) { return (s.Length == 5 || s.Length == 6) && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆电话区号规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆电话区号规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaTelephoneAreaCode(this string s)
-        {
-            return (s.Length == 3 || s.Length == 4) && s[0] == '0' && s.IsNumberOnly();
-        }
+        public static bool IsChinaTelephoneAreaCode(this string s) { return (s.Length == 3 || s.Length == 4) && s[0] == '0' && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否能够转换为数字。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串能够转换为数字则返回 true，否则返回 false。</returns>
-        public static bool IsNumeric(this string s)
-        {
-            return s.All(char.IsNumber);
-        }
+        public static bool IsNumeric(this string s) { return s.All(char.IsNumber); }
 
         /// <summary>
         /// 验证给定的字符串是否仅包含数字。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串仅包含数字则返回 true，否则返回 false。</returns>
-        public static bool IsNumberOnly(this string s)
-        {
-            return !string.IsNullOrEmpty(s) && s.All(char.IsDigit);
-        }
+        public static bool IsNumberOnly(this string s) { return !string.IsNullOrEmpty(s) && s.All(char.IsDigit); }
 
         /// <summary>
         /// 验证给定的字符串是否是合法的 IP 地址格式（注意此方法不验证 IP 地址的有效性）。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合 IP 地址的规则则返回 true，否则返回false。</returns>
-        public static bool IsIPAddress(this string s)
-        {
-            return s.IsMatch(IP_ADDRESS_PATTERN);
-        }
+        public static bool IsIPAddress(this string s) { return s.IsMatch(IP_ADDRESS_PATTERN); }
 
         /// <summary>
         /// 验证给定的字符串是否是合法的 Uri 地址。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合 Uri 规则则返回 true，否则返回false。</returns>
-        public static bool IsUri(this string s)
-        {
-            return s.IsMatch(URI_PATTERN);
-        }
+        public static bool IsUri(this string s) { return s.IsMatch(URI_PATTERN); }
 
         /// <summary>
         /// 将该字符串文本转换为 Boolean 类型。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns><see cref="bool"/></returns>
-        public static bool ToBoolean(this string s)
-        {
-            return StringUtils.ToBoolean(s);
-        }
+        public static bool ToBoolean(this string s) { return StringUtils.ToBoolean(s); }
 
         /// <summary>
         /// 将该字符串中指定位置的字符替换为指定的遮蔽字符。
@@ -159,10 +120,7 @@ namespace Yisoft.Framework.Extensions
         /// <param name="length">要遮蔽的字符串长度。</param>
         /// <param name="maskChar">指定遮蔽字符。</param>
         /// <returns><see cref="string"/>。</returns>
-        public static string Mask(this string s, int index, int length, char maskChar = '*')
-        {
-            return StringUtils.Mask(s, index, length, maskChar);
-        }
+        public static string Mask(this string s, int index, int length, char maskChar = '*') { return StringUtils.Mask(s, index, length, maskChar); }
 
         public static string ToUnderscoreUpperCase(this string s) { return StringUtils.ToUnderscoreUpperCase(s); }
 
@@ -228,34 +186,19 @@ namespace Yisoft.Framework.Extensions
         }
 
         [DebuggerStepThrough]
-        public static bool IsMissing(this string value)
-        {
-            return string.IsNullOrWhiteSpace(value);
-        }
+        public static bool IsMissing(this string value) { return string.IsNullOrWhiteSpace(value); }
 
         [DebuggerStepThrough]
-        public static bool IsMissingOrTooLong(this string value, int maxLength)
-        {
-            return string.IsNullOrWhiteSpace(value) || value.Length > maxLength;
-        }
+        public static bool IsMissingOrTooLong(this string value, int maxLength) { return string.IsNullOrWhiteSpace(value) || value.Length > maxLength; }
 
         [DebuggerStepThrough]
-        public static bool IsPresent(this string value)
-        {
-            return !string.IsNullOrWhiteSpace(value);
-        }
+        public static bool IsPresent(this string value) { return !string.IsNullOrWhiteSpace(value); }
 
         [DebuggerStepThrough]
-        public static string EnsureLeadingSlash(this string url)
-        {
-            return !url.StartsWith("/") ? "/" + url : url;
-        }
+        public static string EnsureLeadingSlash(this string url) { return !url.StartsWith("/") ? "/" + url : url; }
 
         [DebuggerStepThrough]
-        public static string EnsureTrailingSlash(this string url)
-        {
-            return !url.EndsWith("/") ? url + "/" : url;
-        }
+        public static string EnsureTrailingSlash(this string url) { return !url.EndsWith("/") ? url + "/" : url; }
 
         [DebuggerStepThrough]
         public static string RemoveLeadingSlash(this string url)

@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 
@@ -27,10 +17,7 @@ namespace Yisoft.Framework
         /// 初始化 <see cref="EnumExtraAttribute"/> 类的新实例并带有说明。
         /// </summary>
         /// <param name="title">说明文本。</param>
-        public EnumExtraAttribute(string title = null)
-        {
-            SetDescription(title);
-        }
+        public EnumExtraAttribute(string title = null) { SetDescription(title); }
 
         public string Title { get; set; }
 
@@ -45,10 +32,7 @@ namespace Yisoft.Framework
         /// 设置说明文本为指定值。
         /// </summary>
         /// <param name="title">说明文本。</param>
-        public void SetDescription(string title)
-        {
-            Title = title;
-        }
+        public void SetDescription(string title) { Title = title; }
 
         public virtual EnumExtraInfo GetExtra(Enum @enum)
         {

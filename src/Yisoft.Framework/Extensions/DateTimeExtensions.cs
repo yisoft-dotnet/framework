@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Diagnostics;
@@ -58,10 +48,7 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="dateTime"><see cref="DateTime"/></param>
         /// <returns>返回 <see cref="TimeSpan"/>。</returns>
-        public static TimeSpan GetDateDiffOfNow(this DateTime dateTime)
-        {
-            return DateTime.Now - dateTime;
-        }
+        public static TimeSpan GetDateDiffOfNow(this DateTime dateTime) { return DateTime.Now - dateTime; }
 
         /// <summary>
         /// 根据当前 <see cref="DateTime"/> 与指定的表示生日的 <see cref="DateTime"/> 返回年龄。
@@ -80,28 +67,16 @@ namespace Yisoft.Framework.Extensions
         }
 
         [DebuggerStepThrough]
-        public static bool HasExceeded(this DateTime time, int seconds)
-        {
-            return DateTimeUtils.UtcNow > time.AddSeconds(seconds);
-        }
+        public static bool HasExceeded(this DateTime time, int seconds) { return DateTimeUtils.UtcNow > time.AddSeconds(seconds); }
 
         [DebuggerStepThrough]
-        public static int GetLifetimeInSeconds(this DateTime time)
-        {
-            return (int) (DateTimeUtils.UtcNow - time).TotalSeconds;
-        }
+        public static int GetLifetimeInSeconds(this DateTime time) { return (int) (DateTimeUtils.UtcNow - time).TotalSeconds; }
 
         [DebuggerStepThrough]
-        public static bool HasExpired(this DateTime? expirationTime)
-        {
-            return expirationTime.HasValue && expirationTime.Value.HasExpired();
-        }
+        public static bool HasExpired(this DateTime? expirationTime) { return expirationTime.HasValue && expirationTime.Value.HasExpired(); }
 
         [DebuggerStepThrough]
-        public static bool HasExpired(this DateTime expirationTime)
-        {
-            return expirationTime < DateTimeUtils.UtcNow;
-        }
+        public static bool HasExpired(this DateTime expirationTime) { return expirationTime < DateTimeUtils.UtcNow; }
 
         public static DateTime AccurateToMinute(this DateTime d) { return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, 0); }
 

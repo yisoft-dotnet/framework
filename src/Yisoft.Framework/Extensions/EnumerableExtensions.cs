@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -36,6 +26,7 @@ namespace Yisoft.Framework.Extensions
         public static string ToString<T>(this IEnumerable<T> source, string separator)
         {
             StringBuilder sb = null;
+
             foreach (var item in source)
             {
                 if (sb == null) sb = new StringBuilder();

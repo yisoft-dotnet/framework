@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections;
@@ -72,24 +62,14 @@ namespace Yisoft.Framework.Collections.Generic
             ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).CopyTo(array, arrayIndex);
         }
 
-        public bool ContainsKey(TKey key)
-        {
-            return key == null
-                ? throw new ArgumentNullException(nameof(key))
-                : _keysToValues.ContainsKey(key);
-        }
+        public bool ContainsKey(TKey key) { return _keysToValues.ContainsKey(key); }
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
         {
             return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item);
         }
 
-        public bool TryGetValue(TKey key, out TValue value)
-        {
-            return key == null
-                ? throw new ArgumentNullException(nameof(key))
-                : _keysToValues.TryGetValue(key, out value);
-        }
+        public bool TryGetValue(TKey key, out TValue value) { return _keysToValues.TryGetValue(key, out value); }
 
         public TValue this[TKey key]
         {

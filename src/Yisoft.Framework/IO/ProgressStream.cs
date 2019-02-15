@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.IO;
@@ -113,10 +103,7 @@ namespace Yisoft.Framework.IO
         /// 引发 <see cref="ProgressChangedEventHandler"/> 事件。
         /// </summary>
         /// <param name="e">包含事件数据的 <see cref="ProgressChangedEventArgs"/>。</param>
-        protected void OnProgressChanged(ProgressChangedEventArgs e)
-        {
-            ProgressChanged?.Invoke(this, e);
-        }
+        protected void OnProgressChanged(ProgressChangedEventArgs e) { ProgressChanged?.Invoke(this, e); }
 
         /// <summary>
         /// 从当前流读取字节序列，并将此流中的位置提升读取的字节数。
@@ -169,9 +156,6 @@ namespace Yisoft.Framework.IO
         /// <param name="buffer">字节数组。此方法将 <paramref name="count"/> 个字节从 <paramref name="buffer"/> 复制到当前流。</param>
         /// <param name="offset"><paramref name="buffer"/> 中的从零开始的字节偏移量，从此处开始将字节复制到当前流。</param>
         /// <param name="count">要写入当前流的字节数。</param>
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw new IOException("流不可写。");
-        }
+        public override void Write(byte[] buffer, int offset, int count) { throw new IOException("流不可写。"); }
     }
 }

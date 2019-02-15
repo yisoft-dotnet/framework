@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System.Text;
 using Yisoft.Framework.Security.Cryptography;
@@ -40,10 +30,7 @@ namespace Yisoft.Framework.Extensions
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="System.Boolean"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回指定字符串的 SHA1 哈希值。</returns>
-        public static string SHA1(this string s, bool lowerCase = true, Encoding encoding = null)
-        {
-            return HashAlgorithmHelper.SHA1(s, lowerCase, encoding);
-        }
+        public static string SHA1(this string s, bool lowerCase = true, Encoding encoding = null) { return HashAlgorithmHelper.SHA1(s, lowerCase, encoding); }
 
         /// <summary>
         /// 计算指定字符串的 SHA256 哈希值。

@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 using System;
 using System.Collections.Generic;
@@ -208,7 +198,9 @@ namespace Yisoft.Framework
 
             var list = canFilter ? Descriptions.Select(item => item) : DefaultDescriptions.Select(item => item);
 
-            foreach (var item in list) if (string.Compare(item.Value.Title, descriptionValue, ignoreCase) == 0) return item.Key;
+            foreach (var item in list)
+                if (string.Compare(item.Value.Title, descriptionValue, ignoreCase) == 0)
+                    return item.Key;
 
             return default(TEnum);
         }

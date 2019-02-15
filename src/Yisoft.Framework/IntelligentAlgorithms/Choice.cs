@@ -1,17 +1,7 @@
-//      )                             *     
-//   ( /(        *   )       (      (  `    
-//   )\()) (   ` )  /( (     )\     )\))(   
-//  ((_)\  )\   ( )(_)))\ ((((_)(  ((_)()\  
-// __ ((_)((_) (_(_())((_) )\ _ )\ (_()((_) 
-// \ \ / / (_) |_   _|| __|(_)_\(_)|  \/  | 
-//  \ V /  | | _ | |  | _|  / _ \  | |\/| | 
-//   |_|   |_|(_)|_|  |___|/_/ \_\ |_|  |_| 
-// 
-// This file is subject to the terms and conditions defined in
-// file 'License.txt', which is part of this source code package.
-// 
+// ===============================================================================
+// Website: https://yi.team/
 // Copyright © Yi.TEAM. All rights reserved.
-// -------------------------------------------------------------------------------
+// ===============================================================================
 
 namespace Yisoft.Framework.IntelligentAlgorithms
 {
@@ -46,11 +36,16 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         {
             switch (Type)
             {
-                case ChoiceType.Equal: return $"{Added}";
-                case ChoiceType.Substitute: return $"[-{Removed}+{Added}]";
-                case ChoiceType.Remove: return $"-{Removed}";
-                case ChoiceType.Add: return $"+{Added}";
-                default: return null;
+                case ChoiceType.Equal:
+                    return $"{Added}";
+                case ChoiceType.Substitute:
+                    return $"[-{Removed}+{Added}]";
+                case ChoiceType.Remove:
+                    return $"-{Removed}";
+                case ChoiceType.Add:
+                    return $"+{Added}";
+                default:
+                    return string.Empty;
             }
         }
     }
