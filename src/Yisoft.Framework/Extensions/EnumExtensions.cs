@@ -63,7 +63,7 @@ namespace Yisoft.Framework.Extensions
         /// <returns>返回 <typeparamref name="TValue"/> 对象。</returns>
         public static TValue GetDescriptionValue<T, TValue>(this Enum @enum,
             Func<T, TValue> getValueFunction,
-            TValue defaultValue = default(TValue))
+            TValue defaultValue = default)
             where T : EnumExtraAttribute
         {
             if (getValueFunction == null) throw new ArgumentNullException(nameof(getValueFunction));

@@ -18,9 +18,6 @@ namespace Yisoft.Framework.Extensions
         /// <param name="ipAddress"><see cref="System.Net.IPAddress"/></param>
         /// <param name="format">指定用于 <see cref="IPAddressFormatProvider"/> 的格式字符串。</param>
         /// <returns>返回表示当前 <see cref="System.Net.IPAddress"/> 的字符串。</returns>
-        public static string ToString(this IPAddress ipAddress, string format)
-        {
-            return string.Format(new IPAddressFormatProvider(), $"{{0:{format}}}", ipAddress);
-        }
+        public static string ToString(this IPAddress ipAddress, string format) { return string.Format(new IPAddressFormatProvider(), $"{{0:{format}}}", ipAddress); }
     }
 }

@@ -20,9 +20,11 @@ namespace Yisoft.Framework.Utilities
             {
                 case MemberExpression memberExpression:
                     propertyInfo = memberExpression.Member as PropertyInfo;
+
                     break;
                 case UnaryExpression unaryExpression:
                     propertyInfo = ((MemberExpression) unaryExpression.Operand).Member as PropertyInfo;
+
                     break;
             }
 
@@ -40,9 +42,11 @@ namespace Yisoft.Framework.Utilities
             {
                 case MemberExpression memberExpression:
                     propertyInfo = memberExpression.Member as PropertyInfo;
+
                     break;
                 case UnaryExpression unaryExpression:
                     propertyInfo = ((MemberExpression) unaryExpression.Operand).Member as PropertyInfo;
+
                     break;
             }
 

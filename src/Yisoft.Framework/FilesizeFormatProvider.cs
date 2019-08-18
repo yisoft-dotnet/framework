@@ -28,8 +28,7 @@ namespace Yisoft.Framework
         {
             var iformat = format;
 
-            if (iformat == null || !iformat.StartsWith(_FORMAT, StringComparison.OrdinalIgnoreCase) || arg is string)
-                return _DefaultFormat(iformat, arg, formatProvider);
+            if (iformat == null || !iformat.StartsWith(_FORMAT, StringComparison.OrdinalIgnoreCase) || arg is string) return _DefaultFormat(iformat, arg, formatProvider);
 
             decimal size;
 

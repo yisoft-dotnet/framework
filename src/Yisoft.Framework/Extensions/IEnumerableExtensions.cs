@@ -16,7 +16,7 @@ namespace Yisoft.Framework.Extensions
         [DebuggerStepThrough]
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> list) { return list == null || !list.Any(); }
 
-        public static bool IsNullOrEmptyOrHas<T>(this IEnumerable<T> list, T value = default(T))
+        public static bool IsNullOrEmptyOrHas<T>(this IEnumerable<T> list, T value = default)
         {
             // ReSharper disable PossibleMultipleEnumeration
             return list == null || !list.Any() || list.Contains(value);

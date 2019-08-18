@@ -55,6 +55,7 @@ namespace Yisoft.Framework.Json.Converters
             while (reader.Read())
             {
                 if (reader.TokenType == JsonToken.EndObject) break;
+
                 if (reader.TokenType != JsonToken.PropertyName) continue;
 
                 switch (reader.Value.ToString().ToUpper())
@@ -65,6 +66,7 @@ namespace Yisoft.Framework.Json.Converters
                         continue;
                     case "VALUE":
                         enumValue = long.TryParse(reader.ReadAsString(), out var value) ? (long?) value : null;
+
                         break;
                 }
             }

@@ -22,9 +22,9 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             Added = added;
         }
 
-        public static Choice<T> Add(T value) { return new Choice<T>(ChoiceType.Add, default(T), value); }
+        public static Choice<T> Add(T value) { return new Choice<T>(ChoiceType.Add, default, value); }
 
-        public static Choice<T> Remove(T value) { return new Choice<T>(ChoiceType.Remove, value, default(T)); }
+        public static Choice<T> Remove(T value) { return new Choice<T>(ChoiceType.Remove, value, default); }
 
         public static Choice<T> Equal(T value) { return new Choice<T>(ChoiceType.Equal, value, value); }
 

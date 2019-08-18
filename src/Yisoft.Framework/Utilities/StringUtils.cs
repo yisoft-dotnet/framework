@@ -44,20 +44,14 @@ namespace Yisoft.Framework.Utilities
         /// </summary>
         /// <param name="text">要处理的字符串。</param>
         /// <returns><see cref="string"/>。</returns>
-        public static string StripBlankLine(string text)
-        {
-            return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"\n\s*\n", "\n", _REGEX_OPTIONS);
-        }
+        public static string StripBlankLine(string text) { return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"\n\s*\n", "\n", _REGEX_OPTIONS); }
 
         /// <summary>
         /// 返回清除了所有 HTML 标记的字符串的副本。
         /// </summary>
         /// <param name="text">包含要处理的文本的字符串。</param>
         /// <returns>str<see cref="string"/>。ing</returns>
-        public static string StripHtml(string text)
-        {
-            return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"<\/?[^>]*>", string.Empty, _REGEX_OPTIONS);
-        }
+        public static string StripHtml(string text) { return string.IsNullOrEmpty(text) ? string.Empty : Regex.Replace(text, @"<\/?[^>]*>", string.Empty, _REGEX_OPTIONS); }
 
         /// <summary>
         /// 在指定的输入字符串内，使用指定的替换字符串替换与指定正则表达式匹配的所有字符串。指定的选项将修改匹配操作。
@@ -113,6 +107,7 @@ namespace Yisoft.Framework.Utilities
             var blen = u8.GetByteCount(su8);
 
             if (blen < startindex) return content;
+
             if (length <= 0) length = blen;
             if (length <= 1) length = 2;
 
@@ -146,6 +141,7 @@ namespace Yisoft.Framework.Utilities
         public static int GetBytesLength(string content, string encoding)
         {
             if (string.IsNullOrEmpty(content)) return 0;
+
             if (string.IsNullOrEmpty(encoding)) encoding = "UTF-8";
 
             return Encoding.GetEncoding(encoding).GetByteCount(content);
@@ -294,15 +290,9 @@ namespace Yisoft.Framework.Utilities
             return string.Join(" ", words).ToLower();
         }
 
-        public static string ToAllUpperCase(string original, bool camelCase = true)
-        {
-            return string.Concat(SplitByCharacterType(original, camelCase)).ToUpper();
-        }
+        public static string ToAllUpperCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToUpper(); }
 
-        public static string ToAllLowerCase(string original, bool camelCase = true)
-        {
-            return string.Concat(SplitByCharacterType(original, camelCase)).ToLower();
-        }
+        public static string ToAllLowerCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToLower(); }
 
         public static string ToCamelCase(string original)
         {

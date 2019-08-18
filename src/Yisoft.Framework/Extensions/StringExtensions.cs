@@ -282,15 +282,9 @@ namespace Yisoft.Framework.Extensions
 
         public static bool Contains(this string source, string toCheck, StringComparison comp) { return source.IndexOf(toCheck, comp) >= 0; }
 
-        private static InvalidOperationException _NotFound(string str, char separator)
-        {
-            return new InvalidOperationException($"Separator '{separator}' not found in '{str}'");
-        }
+        private static InvalidOperationException _NotFound(string str, char separator) { return new InvalidOperationException($"Separator '{separator}' not found in '{str}'"); }
 
-        private static InvalidOperationException _NotFound(string str, string separator)
-        {
-            return new InvalidOperationException($"Separator '{separator}' not found in '{str}'");
-        }
+        private static InvalidOperationException _NotFound(string str, string separator) { return new InvalidOperationException($"Separator '{separator}' not found in '{str}'"); }
 
         /// <summary>
         /// get the substring before the first occurence of the separator
@@ -656,10 +650,7 @@ namespace Yisoft.Framework.Extensions
             return str.Substring(0, str.Length - numChars);
         }
 
-        public static string TryRemoveEnd(this string str, int numChars)
-        {
-            return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars);
-        }
+        public static string TryRemoveEnd(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars); }
 
         public static List<string> SplitInGroupsOf(this string str, int maxChars)
         {

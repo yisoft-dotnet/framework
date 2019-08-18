@@ -31,8 +31,7 @@ namespace Microsoft.Extensions.Configuration
 
             path = path.Replace('\\', '/');
 
-            foreach (var searchPattern in searchPatterns)
-                Scan(builder, configAction, path, searchPattern);
+            foreach (var searchPattern in searchPatterns) Scan(builder, configAction, path, searchPattern);
 
             return builder;
         }

@@ -64,10 +64,7 @@ namespace Yisoft.Framework.Collections.Generic
 
         public bool ContainsKey(TKey key) { return _keysToValues.ContainsKey(key); }
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
-        {
-            return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item);
-        }
+        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) { return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item); }
 
         public bool TryGetValue(TKey key, out TValue value) { return _keysToValues.TryGetValue(key, out value); }
 
@@ -143,7 +140,7 @@ namespace Yisoft.Framework.Collections.Generic
             _valuesToKeys.Clear();
         }
 
-        public TValue GetValue(TKey key) { return TryGetValue(key, out var value) ? value : default(TValue); }
+        public TValue GetValue(TKey key) { return TryGetValue(key, out var value) ? value : default; }
 
         public bool ContainsValue(TValue value)
         {
@@ -152,7 +149,7 @@ namespace Yisoft.Framework.Collections.Generic
                 : _valuesToKeys.ContainsKey(value);
         }
 
-        public TKey GetKey(TValue value) { return TryGetKey(value, out var key) ? key : default(TKey); }
+        public TKey GetKey(TValue value) { return TryGetKey(value, out var key) ? key : default; }
 
         public bool TryGetKey(TValue value, out TKey key)
         {
@@ -173,9 +170,6 @@ namespace Yisoft.Framework.Collections.Generic
             Add(key, value);
         }
 
-        private bool _ValueBelongsToOtherKey(TKey key, TValue value)
-        {
-            return _valuesToKeys.TryGetValue(value, out var otherKey) && !_keyComparer.Equals(key, otherKey);
-        }
+        private bool _ValueBelongsToOtherKey(TKey key, TValue value) { return _valuesToKeys.TryGetValue(value, out var otherKey) && !_keyComparer.Equals(key, otherKey); }
     }
 }
