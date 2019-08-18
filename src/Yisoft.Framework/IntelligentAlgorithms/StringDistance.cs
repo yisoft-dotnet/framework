@@ -163,7 +163,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         {
             return string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2)
                 ? 0
-                : LongestCommonSubstring(str1.ToCharArray(), str2.ToCharArray(), out int _, out var __);
+                : LongestCommonSubstring(str1.ToCharArray(), str2.ToCharArray(), out _, out var __);
         }
 
         public int LongestCommonSubstring(string str1, string str2, out int startPos1, out int startPos2)
@@ -361,10 +361,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             }
         }
 
-        private static void _AddResults<T>(List<DiffPair<T>> list, Slice<T> slice, DiffAction action)
-        {
-            list.AddRange(slice.Select(t => new DiffPair<T>(action, t)));
-        }
+        private static void _AddResults<T>(List<DiffPair<T>> list, Slice<T> slice, DiffAction action) { list.AddRange(slice.Select(t => new DiffPair<T>(action, t))); }
 
         private void _TryDiff<T>(Slice<T> sliceOld, Slice<T> sliceNew, IEqualityComparer<T> comparer, List<DiffPair<T>> result)
         {

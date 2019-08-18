@@ -75,10 +75,7 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="bool"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回表示计算所得的哈希代码的字符串。</returns>
-        public static string HMACMD5(string input, string key, bool lowerCase = true, Encoding encoding = null)
-        {
-            return ComputeHash<HMACMD5>(input, key, lowerCase, encoding);
-        }
+        public static string HMACMD5(string input, string key, bool lowerCase = true, Encoding encoding = null) { return ComputeHash<HMACMD5>(input, key, lowerCase, encoding); }
 
         /// <summary>
         /// 使用 <see cref="HMACSHA1"/> 计算指定字节数组的哈希值。
@@ -88,10 +85,7 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="bool"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回表示计算所得的哈希代码的字符串。</returns>
-        public static string HMACSHA1(string input, string key, bool lowerCase = true, Encoding encoding = null)
-        {
-            return ComputeHash<HMACSHA1>(input, key, lowerCase, encoding);
-        }
+        public static string HMACSHA1(string input, string key, bool lowerCase = true, Encoding encoding = null) { return ComputeHash<HMACSHA1>(input, key, lowerCase, encoding); }
 
         /// <summary>
         /// 使用 <see cref="HMACSHA256"/> 计算指定字节数组的哈希值。

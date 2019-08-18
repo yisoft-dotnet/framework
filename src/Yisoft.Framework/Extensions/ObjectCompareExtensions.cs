@@ -49,10 +49,7 @@ namespace Yisoft.Framework.Extensions
 
         public static int CompareTo(this string a, string b, CompareOptions options) { return CompareTo(a, b, _ZhCNCulture, options); }
 
-        public static int CompareTo(this string a, string b, CultureInfo culture, CompareOptions options = CompareOptions.None)
-        {
-            return string.Compare(a, b, culture, options);
-        }
+        public static int CompareTo(this string a, string b, CultureInfo culture, CompareOptions options = CompareOptions.None) { return string.Compare(a, b, culture, options); }
 
         public static int End<T>(this ObjectCompareContext<T> context) { return context.Value; }
     }

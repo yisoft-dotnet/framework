@@ -24,10 +24,11 @@ namespace Yisoft.Framework
         public static Stream GetStreamFromAssembly(string resName, Assembly asm = null)
         {
             if (asm == null) asm = Assembly.GetEntryAssembly();
+
             if (resName == null) throw new ArgumentNullException(nameof(resName));
             if (resName.Length == 0) throw new ArgumentOutOfRangeException(nameof(resName));
 
-            return asm.GetManifestResourceStream($"{asm.GetName().Name}.{resName}");
+            return asm?.GetManifestResourceStream($"{asm.GetName().Name}.{resName}");
         }
 
         /// <summary>

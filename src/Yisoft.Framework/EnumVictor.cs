@@ -168,6 +168,7 @@ namespace Yisoft.Framework
 
                 if (DescriptionFilter != null && DescriptionFilter.Count > 0 && DescriptionFilter.ContainsKey(itemValue))
                     descAttribute.SetDescription(DescriptionFilter[itemValue]);
+
                 if (Descriptions.ContainsKey(itemValue) == false) Descriptions.Add(itemValue, descAttribute);
                 if (DefaultDescriptions.ContainsKey(itemValue) == false) DefaultDescriptions.Add(itemValue, _GetDescription(value.ToString()));
             }
@@ -193,8 +194,8 @@ namespace Yisoft.Framework
         /// <returns>返回 <typeparamref name="TEnum"/>。</returns>
         public TEnum GetEnumFromDescription(string descriptionValue, bool ignoreCase = false, bool canFilter = true)
         {
-            if (string.IsNullOrEmpty(descriptionValue)) return default(TEnum);
-            if (Descriptions.Count == 0) return default(TEnum);
+            if (string.IsNullOrEmpty(descriptionValue)) return default;
+            if (Descriptions.Count == 0) return default;
 
             var list = canFilter ? Descriptions.Select(item => item) : DefaultDescriptions.Select(item => item);
 
@@ -202,7 +203,7 @@ namespace Yisoft.Framework
                 if (string.Compare(item.Value.Title, descriptionValue, ignoreCase) == 0)
                     return item.Key;
 
-            return default(TEnum);
+            return default;
         }
 
         /// <summary>
@@ -214,8 +215,10 @@ namespace Yisoft.Framework
         public TEnumDescription GetDescription(TEnum enumObj, bool canFilter = true)
         {
             return canFilter
-                ? (Descriptions.ContainsKey(enumObj) ? Descriptions[enumObj] : null)
-                : (DefaultDescriptions.ContainsKey(enumObj) ? DefaultDescriptions[enumObj] : null);
+                ? Descriptions.ContainsKey(enumObj) ? Descriptions[enumObj] : null
+                : DefaultDescriptions.ContainsKey(enumObj)
+                    ? DefaultDescriptions[enumObj]
+                    : null;
         }
 
         /// <summary>
@@ -229,8 +232,10 @@ namespace Yisoft.Framework
         public string GetDescriptionValue(TEnum enumObj, bool canFilter = false, string defaultValue = null)
         {
             return canFilter
-                ? (Descriptions.ContainsKey(enumObj) ? Descriptions[enumObj].Title : defaultValue ?? enumObj.ToString())
-                : (DefaultDescriptions.ContainsKey(enumObj) ? DefaultDescriptions[enumObj].Title : defaultValue ?? enumObj.ToString());
+                ? Descriptions.ContainsKey(enumObj) ? Descriptions[enumObj].Title : defaultValue ?? enumObj.ToString()
+                : DefaultDescriptions.ContainsKey(enumObj)
+                    ? DefaultDescriptions[enumObj].Title
+                    : defaultValue ?? enumObj.ToString();
         }
 
         /// <summary>

@@ -39,10 +39,7 @@ namespace Yisoft.Framework.Extensions
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="System.Boolean"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回指定字符串的 SHA256 哈希值。</returns>
-        public static string SHA256(this string s, bool lowerCase = true, Encoding encoding = null)
-        {
-            return HashAlgorithmHelper.SHA256(s, lowerCase, encoding);
-        }
+        public static string SHA256(this string s, bool lowerCase = true, Encoding encoding = null) { return HashAlgorithmHelper.SHA256(s, lowerCase, encoding); }
 
         /// <summary>
         /// 计算指定字符串的 SHA384 哈希值。
@@ -51,10 +48,7 @@ namespace Yisoft.Framework.Extensions
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="System.Boolean"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回指定字符串的 SHA384 哈希值。</returns>
-        public static string SHA384(this string s, bool lowerCase = true, Encoding encoding = null)
-        {
-            return HashAlgorithmHelper.SHA384(s, lowerCase, encoding);
-        }
+        public static string SHA384(this string s, bool lowerCase = true, Encoding encoding = null) { return HashAlgorithmHelper.SHA384(s, lowerCase, encoding); }
 
         /// <summary>
         /// 计算指定字符串的 SHA512 哈希值。
@@ -63,9 +57,6 @@ namespace Yisoft.Framework.Extensions
         /// <param name="lowerCase">表示输出是否应为小写形式的 <see cref="System.Boolean"/>，默认为 false。</param>
         /// <param name="encoding">字符编码，默认使用 <see cref="Encoding.UTF8"/>。</param>
         /// <returns>返回指定字符串的 SHA512 哈希值。</returns>
-        public static string SHA512(this string s, bool lowerCase = true, Encoding encoding = null)
-        {
-            return HashAlgorithmHelper.SHA512(s, lowerCase, encoding);
-        }
+        public static string SHA512(this string s, bool lowerCase = true, Encoding encoding = null) { return HashAlgorithmHelper.SHA512(s, lowerCase, encoding); }
     }
 }

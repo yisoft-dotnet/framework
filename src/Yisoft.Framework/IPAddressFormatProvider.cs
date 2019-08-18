@@ -26,6 +26,7 @@ namespace Yisoft.Framework
             if (arg == null || arg.ToString().Length == 0) return string.Empty;
 
             if (!(arg is IPAddress ipAddress)) IPAddress.TryParse(arg.ToString(), out ipAddress);
+
             if (ipAddress == null) return arg.ToString();
             if (string.IsNullOrEmpty(format)) return ipAddress.ToString();
 
@@ -59,14 +60,17 @@ namespace Yisoft.Framework
                         case "xxxx":
                         case "xxx":
                             iformat = "{0:D3}.{1:D3}.{2:D3}.{3:D3}";
+
                             break;
                         case "xx.xx.xx.xx":
                         case "xx":
                             iformat = "{0:X2}.{1:X2}.{2:X2}.{3:X2}";
+
                             break;
                         case "x.x.x.x":
                         case "x":
                             iformat = "{0}.{1}.{2}.{3}";
+
                             break;
                     }
 
@@ -81,10 +85,12 @@ namespace Yisoft.Framework
                         case "xxx":
                             iformat =
                                 "{0:X2}{1:X2}:{2:X2}{3:X2}:{4:X2}{5:X2}:{6:X2}{7:X2}:{8:X2}{9:X2}:{10:X2}{11:X2}:{12:X2}{13:X2}:{14:X2}{15:X2}";
+
                             break;
                         case "x:x:x:x:x:x:x:x":
                         case "x":
                             iformat = "{0:X}{1:X}:{2:X}{3:X}:{4:X}{5:X}:{6:X}{7:X}:{8:X}{9:X}:{10:X}{11:X}:{12:X}{13:X}:{14:X}{15:X}";
+
                             break;
                     }
 

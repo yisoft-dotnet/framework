@@ -51,6 +51,7 @@ namespace Yisoft.Framework
                 case SequentialGuidType.SequentialAtEnd:
                     Buffer.BlockCopy(randomBytes, 0, guidBytes, 0, 10);
                     Buffer.BlockCopy(timestampBytes, 2, guidBytes, 10, 6);
+
                     break;
             }
 

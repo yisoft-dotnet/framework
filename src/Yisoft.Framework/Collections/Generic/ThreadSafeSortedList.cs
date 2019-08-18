@@ -25,7 +25,7 @@ namespace Yisoft.Framework.Collections.Generic
 
                 try
                 {
-                    return _items.ContainsKey(key) ? _items[key] : default(TValue);
+                    return _items.ContainsKey(key) ? _items[key] : default;
                 }
                 finally
                 {
