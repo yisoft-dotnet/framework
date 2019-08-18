@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Description>dotnet convenient development framework.</Description>
@@ -15,10 +15,20 @@
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/yisoft-dotnet/framework</RepositoryUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
         <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
         <PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
