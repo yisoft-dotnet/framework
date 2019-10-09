@@ -14,13 +14,15 @@ namespace Yisoft.Framework.Extensions
     {
         public static IEnumerable<IGrouping<TKey, T>> GroupWhenChange<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> getGroupKey)
         {
-            Grouping<TKey, T> current = null;
+            if (collection == null) yield break;
+
+            GroupingCollection<TKey, T> current = null;
 
             foreach (var item in collection)
             {
                 if (current == null)
                 {
-                    current = new Grouping<TKey, T>(getGroupKey(item))
+                    current = new GroupingCollection<TKey, T>(getGroupKey(item))
                     {
                         item
                     };
@@ -30,7 +32,7 @@ namespace Yisoft.Framework.Extensions
                 {
                     yield return current;
 
-                    current = new Grouping<TKey, T>(getGroupKey(item))
+                    current = new GroupingCollection<TKey, T>(getGroupKey(item))
                     {
                         item
                     };

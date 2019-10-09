@@ -4,6 +4,7 @@
 // ===============================================================================
 
 using System;
+using Yisoft.Framework.Extensions;
 
 namespace Yisoft.Framework
 {
@@ -34,11 +35,11 @@ namespace Yisoft.Framework
         /// <param name="title">说明文本。</param>
         public void SetDescription(string title) { Title = title; }
 
-        public virtual EnumExtraInfo GetExtra(Enum @enum)
+        public virtual EnumExtraInfo GetExtra(Enum enumObj)
         {
-            var value = Convert.ToInt32(@enum);
+            var value = enumObj.ToInt64();
 
-            return new EnumExtraInfo(Title, @enum.ToString(), value, Rank == 0 ? value : Rank);
+            return new EnumExtraInfo(Title, enumObj?.ToString(), value, Rank == 0 ? value : Rank);
         }
     }
 }

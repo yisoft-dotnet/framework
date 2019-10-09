@@ -15,6 +15,9 @@ namespace Yisoft.Framework.Json.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader == null) return null;
+            if (serializer == null) return null;
+
             var collection = existingValue as NameValueCollection ?? new NameValueCollection();
             var items = serializer.Deserialize<NameValueCollectionItem[]>(reader);
 
@@ -32,6 +35,9 @@ namespace Yisoft.Framework.Json.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            if (writer == null) return ;
+            if (serializer == null) return ;
+
             var collection = (NameValueCollection) value;
 
             if (collection == null) return;
@@ -51,7 +57,7 @@ namespace Yisoft.Framework.Json.Converters
             serializer.Serialize(writer, items);
         }
 
-        public class NameValueCollectionItem
+        private class NameValueCollectionItem
         {
             public string Key { get; set; }
 

@@ -21,18 +21,18 @@ namespace Yisoft.Framework.Extensions
         /// <summary>
         /// 表示电子信箱地址的正则表达式模式的字符串。
         /// </summary>
-        public const string EMAIL_PATTERN = @"^([a-z0-9][a-z0-9_\-\.\+]*)@(([a-z0-9][a-z0-9\.\-]{0,63})\.([a-z]{1,5}))$";
+        private const string _EMAIL_PATTERN = @"^([a-z0-9][a-z0-9_\-\.\+]*)@(([a-z0-9][a-z0-9\.\-]{0,63})\.([a-z]{1,5}))$";
 
         /// <summary>
         /// 表示 IP 地址的正则表达式模式的字符串。
         /// </summary>
-        public const string IP_ADDRESS_PATTERN =
+        private const string _IP_ADDRESS_PATTERN =
             @"(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])";
 
         /// <summary>
         /// 表示 Uri 地址的正则表达式模式的字符串。
         /// </summary>
-        public const string URI_PATTERN =
+        private const string _URI_PATTERN =
             @"^((https|http|ftp|rtsp|mms)?://)?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}\.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.[a-z]{2,6})(:[0-9]{1,4})?((/?)|(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
 
         /// <summary>
@@ -54,35 +54,35 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合电子信箱地址的规则则返回 true，否则返回 false。</returns>
-        public static bool IsEmail(this string s) { return s.IsMatch(EMAIL_PATTERN); }
+        public static bool IsEmail(this string s) { return s.IsMatch(_EMAIL_PATTERN); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆手机号码规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆手机号码规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaMobilePhoneNumber(this string s) { return s.Length == 11 && s[0] == '1' && s.IsNumberOnly(); }
+        public static bool IsChinaMobilePhoneNumber(this string s) { return s != null && s.Length == 11 && s[0] == '1' && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆邮政编码规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆邮政编码规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaPostalCode(this string s) { return (s.Length == 5 || s.Length == 6) && s.IsNumberOnly(); }
+        public static bool IsChinaPostalCode(this string s) { return s != null && (s.Length == 5 || s.Length == 6) && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否符合中国大陆电话区号规则。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合中国大陆电话区号规则则返回 true，否则返回 false。</returns>
-        public static bool IsChinaTelephoneAreaCode(this string s) { return (s.Length == 3 || s.Length == 4) && s[0] == '0' && s.IsNumberOnly(); }
+        public static bool IsChinaTelephoneAreaCode(this string s) { return s != null && (s.Length == 3 || s.Length == 4) && s[0] == '0' && s.IsNumberOnly(); }
 
         /// <summary>
         /// 验证给定的字符串是否能够转换为数字。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串能够转换为数字则返回 true，否则返回 false。</returns>
-        public static bool IsNumeric(this string s) { return s.All(char.IsNumber); }
+        public static bool IsNumeric(this string s) { return s != null && s.All(char.IsNumber); }
 
         /// <summary>
         /// 验证给定的字符串是否仅包含数字。
@@ -96,14 +96,14 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合 IP 地址的规则则返回 true，否则返回false。</returns>
-        public static bool IsIPAddress(this string s) { return s.IsMatch(IP_ADDRESS_PATTERN); }
+        public static bool IsIPAddress(this string s) { return s.IsMatch(_IP_ADDRESS_PATTERN); }
 
         /// <summary>
         /// 验证给定的字符串是否是合法的 Uri 地址。
         /// </summary>
         /// <param name="s">表示文本，即一系列 Unicode 字符。</param>
         /// <returns>如果给定的字符串符合 Uri 规则则返回 true，否则返回false。</returns>
-        public static bool IsUri(this string s) { return s.IsMatch(URI_PATTERN); }
+        public static bool IsUri(this string s) { return s.IsMatch(_URI_PATTERN); }
 
         /// <summary>
         /// 将该字符串文本转换为 Boolean 类型。
@@ -165,6 +165,8 @@ namespace Yisoft.Framework.Extensions
         [DebuggerStepThrough]
         public static IEnumerable<string> FromSpaceSeparatedString(this string input)
         {
+            if (input == null) return null;
+
             input = input.Trim();
 
             return input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -195,80 +197,100 @@ namespace Yisoft.Framework.Extensions
         public static bool IsPresent(this string value) { return !string.IsNullOrWhiteSpace(value); }
 
         [DebuggerStepThrough]
-        public static string EnsureLeadingSlash(this string url) { return !url.StartsWith("/") ? "/" + url : url; }
-
-        [DebuggerStepThrough]
-        public static string EnsureTrailingSlash(this string url) { return !url.EndsWith("/") ? url + "/" : url; }
-
-        [DebuggerStepThrough]
-        public static string RemoveLeadingSlash(this string url)
+        public static string EnsureLeadingSlash(this string input)
         {
-            if (url != null && url.StartsWith("/")) url = url.Substring(1);
+            if (string.IsNullOrEmpty(input)) return string.Empty;
 
-            return url;
+            return input.StartsWith("/", StringComparison.CurrentCulture) ? input : "/" + input;
         }
 
         [DebuggerStepThrough]
-        public static string RemoveTrailingSlash(this string url)
+        public static string EnsureTrailingSlash(this string input)
         {
-            if (url != null && url.EndsWith("/")) url = url.Substring(0, url.Length - 1);
+            if (string.IsNullOrEmpty(input)) return string.Empty;
 
-            return url;
+            return input.EndsWith("/", StringComparison.CurrentCulture) ? input : input + "/";
         }
 
         [DebuggerStepThrough]
-        public static string CleanUrlPath(this string url)
+        public static string RemoveLeadingSlash(this string input)
         {
-            if (string.IsNullOrWhiteSpace(url)) url = "/";
+            if (string.IsNullOrEmpty(input)) return string.Empty;
 
-            if (url != "/" && url.EndsWith("/")) url = url.Substring(0, url.Length - 1);
+            if (input.StartsWith("/", StringComparison.CurrentCulture)) input = input.Substring(1);
 
-            return url;
+            return input;
         }
 
         [DebuggerStepThrough]
-        public static bool IsLocalUrl(this string url)
+        public static string RemoveTrailingSlash(this string input)
+        {
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+
+            if (input.EndsWith("/", StringComparison.CurrentCulture)) input = input.Substring(0, input.Length - 1);
+
+            return input;
+        }
+
+        [DebuggerStepThrough]
+        public static string CleanupPath(this string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) input = "/";
+
+            if (input != "/" && input.EndsWith("/", StringComparison.CurrentCulture)) input = input.Substring(0, input.Length - 1);
+
+            return input;
+        }
+
+        [DebuggerStepThrough]
+        public static bool IsLocalUrl(this string input)
         {
             return
-                !string.IsNullOrEmpty(url) &&
+                !string.IsNullOrEmpty(input) &&
 
                 // Allows "/" or "/foo" but not "//" or "/\".
-                (url[0] == '/' && (url.Length == 1 || url[1] != '/' && url[1] != '\\') ||
+                (input[0] == '/' && (input.Length == 1 || input[1] != '/' && input[1] != '\\') ||
 
                  // Allows "~/" or "~/foo".
-                 url.Length > 1 && url[0] == '~' && url[1] == '/');
+                 input.Length > 1 && input[0] == '~' && input[1] == '/');
         }
 
         [DebuggerStepThrough]
-        public static string AddQueryString(this string url, string query)
+        public static string AddQueryString(this string input, string query)
         {
-            if (!url.Contains("?")) url += "?";
-            else if (!url.EndsWith("&")) url += "&";
+            if (string.IsNullOrEmpty(input)) return string.Empty;
 
-            return url + query;
+            if (!input.Contains("?", StringComparison.CurrentCulture)) input += "?";
+            else if (!input.EndsWith("&", StringComparison.CurrentCulture)) input += "&";
+
+            return input + query;
         }
 
         [DebuggerStepThrough]
-        public static string AddHashFragment(this string url, string query)
+        public static string AddHashFragment(this string input, string query)
         {
-            if (!url.Contains("#")) url += "#";
+            if (string.IsNullOrEmpty(input)) return string.Empty;
 
-            return url + query;
+            if (!input.Contains("#", StringComparison.CurrentCulture)) input += "#";
+
+            return input + query;
         }
 
-        public static string GetOrigin(this string url)
+        public static string GetOrigin(this string input)
         {
-            if (url == null || !url.StartsWith("http://") && !url.StartsWith("https://")) return null;
+            if (input == null
+                || !input.StartsWith("http://", StringComparison.CurrentCulture)
+                && !input.StartsWith("https://", StringComparison.CurrentCulture)) return null;
 
-            var idx = url.IndexOf("//", StringComparison.Ordinal);
+            var idx = input.IndexOf("//", StringComparison.Ordinal);
 
             if (idx <= 0) return null;
 
-            idx = url.IndexOf("/", idx + 2, StringComparison.Ordinal);
+            idx = input.IndexOf("/", idx + 2, StringComparison.Ordinal);
 
-            if (idx >= 0) url = url.Substring(0, idx);
+            if (idx >= 0) input = input.Substring(0, idx);
 
-            return url;
+            return input;
         }
 
         public static bool HasText(this string str) { return !string.IsNullOrEmpty(str); }
@@ -280,7 +302,7 @@ namespace Yisoft.Framework.Extensions
             throw new ArgumentException(errorMessage);
         }
 
-        public static bool Contains(this string source, string toCheck, StringComparison comp) { return source.IndexOf(toCheck, comp) >= 0; }
+        public static bool Contains(this string source, string toCheck, StringComparison comp) { return source?.IndexOf(toCheck, comp) >= 0; }
 
         private static InvalidOperationException _NotFound(string str, char separator) { return new InvalidOperationException($"Separator '{separator}' not found in '{str}'"); }
 
@@ -291,45 +313,17 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <param name="separator"></param>
-        /// <returns></returns>
-        public static string Before(this string str, char separator)
-        {
-            var index = str.IndexOf(separator);
-
-            if (index == -1) throw _NotFound(str, separator);
-
-            return str.Substring(0, index);
-        }
-
-        /// <summary>
-        /// get the substring before the first occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
         /// <param name="comparisonType"></param>
         /// <returns></returns>
         public static string Before(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+
             var index = str.IndexOf(separator, comparisonType);
 
             if (index == -1) throw _NotFound(str, separator);
 
             return str.Substring(0, index);
-        }
-
-        /// <summary>
-        /// get the substring after the first occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
-        /// <returns></returns>
-        public static string After(this string str, char separator)
-        {
-            var index = str.IndexOf(separator);
-
-            if (index == -1) throw _NotFound(str, separator);
-
-            return str.Substring(index + 1);
         }
 
         /// <summary>
@@ -341,29 +335,15 @@ namespace Yisoft.Framework.Extensions
         /// <returns></returns>
         public static string After(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+            if (string.IsNullOrEmpty(separator)) return str;
+
             var index = str.IndexOf(separator, comparisonType);
 
             if (index == -1) throw _NotFound(str, separator);
 
             return str.Substring(index + separator.Length);
         }
-
-
-        /// <summary>
-        /// get the substring before the first occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
-        /// <returns>the substring before the first occurence of the separator or null if not found</returns>
-        public static string TryBefore(this string str, char separator)
-        {
-            if (str == null) return null;
-
-            var index = str.IndexOf(separator);
-
-            return index == -1 ? null : str.Substring(0, index);
-        }
-
 
         /// <summary>
         /// get the substring before the first occurence of the separator
@@ -386,26 +366,12 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <param name="separator"></param>
-        /// <returns>the substring after the first occurence of the separator or null if not found</returns>
-        public static string TryAfter(this string str, char separator)
-        {
-            if (str == null) return null;
-
-            var index = str.IndexOf(separator);
-
-            return index == -1 ? null : str.Substring(index + 1);
-        }
-
-        /// <summary>
-        /// get the substring after the first occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
         /// <param name="comparisonType"></param>
         /// <returns>the substring after the first occurence of the separator or null if not found</returns>
         public static string TryAfter(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (str == null) return null;
+            if (string.IsNullOrEmpty(separator)) return str;
 
             var index = str.IndexOf(separator, comparisonType);
 
@@ -417,45 +383,17 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <param name="separator"></param>
-        /// <returns>the substring before the last occurence of the separator</returns>
-        public static string BeforeLast(this string str, char separator)
-        {
-            var index = str.LastIndexOf(separator);
-
-            if (index == -1) throw _NotFound(str, separator);
-
-            return str.Substring(0, index);
-        }
-
-        /// <summary>
-        /// get the substring before the last occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
         /// <param name="comparisonType"></param>
         /// <returns>the substring before the last occurence of the separator</returns>
         public static string BeforeLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+
             var index = str.LastIndexOf(separator, comparisonType);
 
             if (index == -1) throw _NotFound(str, separator);
 
             return str.Substring(0, index);
-        }
-
-        /// <summary>
-        /// get the substring after the last occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
-        /// <returns>the substring after the last occurence of the separator</returns>
-        public static string AfterLast(this string str, char separator)
-        {
-            var index = str.LastIndexOf(separator);
-
-            if (index == -1) throw _NotFound(str, separator);
-
-            return str.Substring(index + 1);
         }
 
         /// <summary>
@@ -467,26 +405,14 @@ namespace Yisoft.Framework.Extensions
         /// <returns>the substring after the last occurence of the separator</returns>
         public static string AfterLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+            if (string.IsNullOrEmpty(separator)) return str;
+
             var index = str.LastIndexOf(separator, comparisonType);
 
             if (index == -1) throw _NotFound(str, separator);
 
             return str.Substring(index + separator.Length);
-        }
-
-        /// <summary>
-        /// get the substring before the last occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
-        /// <returns>the substring before the last occurence of the separator or null if not found</returns>
-        public static string TryBeforeLast(this string str, char separator)
-        {
-            if (str == null) return null;
-
-            var index = str.LastIndexOf(separator);
-
-            return index == -1 ? null : str.Substring(0, index);
         }
 
         /// <summary>
@@ -510,26 +436,12 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <param name="separator"></param>
-        /// <returns>the substring after the last occurence of the separator or null if not found</returns>
-        public static string TryAfterLast(this string str, char separator)
-        {
-            if (str == null) return null;
-
-            var index = str.LastIndexOf(separator);
-
-            return index == -1 ? null : str.Substring(index + 1);
-        }
-
-        /// <summary>
-        /// get the substring after the last occurence of the separator
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="separator"></param>
         /// <param name="comparisonType"></param>
         /// <returns>the substring after the last occurence of the separator or null if not found</returns>
         public static string TryAfterLast(this string str, string separator, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (str == null) return null;
+            if (string.IsNullOrEmpty(separator)) return str;
 
             var index = str.LastIndexOf(separator, comparisonType);
 
@@ -541,6 +453,10 @@ namespace Yisoft.Framework.Extensions
             string secondSeparator = null,
             StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+
+            if (string.IsNullOrEmpty(firstSeparator)) throw new ArgumentNullException(nameof(firstSeparator));
+
             if (secondSeparator == null) secondSeparator = firstSeparator;
 
             var start = str.IndexOf(firstSeparator, comparisonType);
@@ -558,13 +474,15 @@ namespace Yisoft.Framework.Extensions
 
         public static string Between(this string str, char firstSeparator, char secondSeparator = (char) 0)
         {
+            if (str == null) return null;
+
             if (secondSeparator == 0) secondSeparator = firstSeparator;
 
-            var start = str.IndexOf(firstSeparator);
+            var start = str.IndexOf(firstSeparator, StringComparison.CurrentCulture);
 
             if (start == -1) throw _NotFound(str, firstSeparator);
 
-            start = start + 1;
+            start += 1;
 
             var end = str.IndexOf(secondSeparator, start);
 
@@ -578,6 +496,8 @@ namespace Yisoft.Framework.Extensions
             string secondSeparator = null,
             StringComparison comparisonType = StringComparison.Ordinal)
         {
+            if (str == null) return null;
+
             if (secondSeparator == null) secondSeparator = firstSeparator;
 
             var start = str.IndexOf(firstSeparator, comparisonType);
@@ -593,9 +513,11 @@ namespace Yisoft.Framework.Extensions
 
         public static string TryBetween(this string str, char firstSeparator, char secondSeparator = (char) 0)
         {
+            if (str == null) return null;
+
             if (secondSeparator == 0) secondSeparator = firstSeparator;
 
-            var start = str.IndexOf(firstSeparator);
+            var start = str.IndexOf(firstSeparator, StringComparison.CurrentCulture);
 
             if (start == -1) return null;
 
@@ -608,6 +530,8 @@ namespace Yisoft.Framework.Extensions
 
         public static string Start(this string str, int numChars)
         {
+            if (str == null) return null;
+
             if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
 
             return str.Substring(0, numChars);
@@ -622,6 +546,8 @@ namespace Yisoft.Framework.Extensions
 
         public static string End(this string str, int numChars)
         {
+            if (str == null) return null;
+
             if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
 
             return str.Substring(str.Length - numChars, numChars);
@@ -636,21 +562,35 @@ namespace Yisoft.Framework.Extensions
 
         public static string RemoveStart(this string str, int numChars)
         {
+            if (str == null) return null;
+
             if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
 
             return str.Substring(numChars);
         }
 
-        public static string TryRemoveStart(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(numChars); }
+        public static string TryRemoveStart(this string str, int numChars)
+        {
+            if (str == null) return null;
+
+            return numChars > str.Length ? string.Empty : str.Substring(numChars);
+        }
 
         public static string RemoveEnd(this string str, int numChars)
         {
+            if (str == null) return null;
+
             if (numChars > str.Length) throw new InvalidOperationException($"String '{str}' is too short");
 
             return str.Substring(0, str.Length - numChars);
         }
 
-        public static string TryRemoveEnd(this string str, int numChars) { return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars); }
+        public static string TryRemoveEnd(this string str, int numChars)
+        {
+            if (str == null) return null;
+
+            return numChars > str.Length ? string.Empty : str.Substring(0, str.Length - numChars);
+        }
 
         public static List<string> SplitInGroupsOf(this string str, int maxChars)
         {
@@ -667,21 +607,21 @@ namespace Yisoft.Framework.Extensions
 
         public static string PadChopRight(this string str, int length)
         {
-            str = str ?? string.Empty;
+            if (str == null) return string.Empty;
 
             return str.Length > length ? str.Substring(0, length) : str.PadRight(length);
         }
 
         public static string PadChopLeft(this string str, int length)
         {
-            str = str ?? string.Empty;
+            if (str == null) return string.Empty;
 
             return str.Length > length ? str.Substring(str.Length - length, length) : str.PadLeft(length);
         }
 
         public static string[] Lines(this string str)
         {
-            if (!str.HasText()) return new string[0];
+            if (!str.HasText()) return Array.Empty<string>();
 
             return str.Split(new[] {"\r\n", "\n"}, StringSplitOptions.None);
         }

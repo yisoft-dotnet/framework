@@ -96,7 +96,10 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// </summary>
         /// <param name="other">与此对象进行比较的对象。</param>
         /// <returns>如果当前对象等于 <paramref name="other"/> 参数，则为 true；否则为 false。</returns>
-        public bool Equals(LevenshteinDistanceResult other) { return String1.Equals(other.String1) && String2.Equals(other.String2); }
+        public bool Equals(LevenshteinDistanceResult other)
+        {
+            return String1.Equals(other.String1, StringComparison.CurrentCulture) && String2.Equals(other.String2, StringComparison.CurrentCulture);
+        }
 
         #endregion
 
@@ -111,7 +114,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// 返回当前对象的哈希代码。
         /// </summary>
         /// <returns>当前 <see cref="LevenshteinDistanceResult"/> 的哈希代码。</returns>
-        public override int GetHashCode() { return (String1 + String2).GetHashCode(); }
+        public override int GetHashCode() { return (String1 + String2).GetHashCode(StringComparison.CurrentCulture); }
 
         /// <summary>
         /// 返回表示当前对象的字符串。
@@ -142,5 +145,17 @@ namespace Yisoft.Framework.IntelligentAlgorithms
 
             return s.ToString();
         }
+
+        public static bool operator ==(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return left.Equals(right); }
+
+        public static bool operator !=(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return !(left == right); }
+
+        public static bool operator <(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return left.CompareTo(right) < 0; }
+
+        public static bool operator <=(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return left.CompareTo(right) <= 0; }
+
+        public static bool operator >(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return left.CompareTo(right) > 0; }
+
+        public static bool operator >=(LevenshteinDistanceResult left, LevenshteinDistanceResult right) { return left.CompareTo(right) >= 0; }
     }
 }

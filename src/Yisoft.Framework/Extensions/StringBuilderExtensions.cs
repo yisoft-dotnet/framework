@@ -25,6 +25,8 @@ namespace Yisoft.Framework.Extensions
             Action<StringBuilder, T> joinAction,
             string separator)
         {
+            if (values == null) return stringBuilder;
+
             var appended = false;
 
             foreach (var value in values)

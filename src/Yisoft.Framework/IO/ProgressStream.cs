@@ -13,6 +13,7 @@ namespace Yisoft.Framework.IO
     /// </summary>
     public class ProgressStream : Stream
     {
+        private readonly object _lockObj = new object();
         private readonly int _notifySize;
         private readonly Stream _stream;
         private bool _abort;
@@ -38,7 +39,7 @@ namespace Yisoft.Framework.IO
         {
             get
             {
-                lock (this) return _stream.CanRead;
+                lock (_lockObj) return _stream.CanRead;
             }
         }
 
@@ -49,7 +50,7 @@ namespace Yisoft.Framework.IO
         {
             get
             {
-                lock (this) return _stream.CanSeek;
+                lock (_lockObj) return _stream.CanSeek;
             }
         }
 
@@ -70,11 +71,11 @@ namespace Yisoft.Framework.IO
         {
             get
             {
-                lock (this) return _stream.Position;
+                lock (_lockObj) return _stream.Position;
             }
             set
             {
-                lock (this) _stream.Position = value;
+                lock (_lockObj) _stream.Position = value;
             }
         }
 
@@ -88,15 +89,16 @@ namespace Yisoft.Framework.IO
         /// </summary>
         public void AbortRead()
         {
-            lock (this) _abort = true;
+            lock (_lockObj) _abort = true;
         }
+
 
         /// <summary>
         /// 清除该流的所有缓冲区，并使得所有缓冲数据被写入到基础设备。
         /// </summary>
         public override void Flush()
         {
-            lock (this) _stream.Flush();
+            lock (_lockObj) _stream.Flush();
         }
 
         /// <summary>
@@ -114,7 +116,7 @@ namespace Yisoft.Framework.IO
         /// <returns>读入缓冲区中的总字节数。如果当前可用的字节数没有请求的字节数那么多，则总字节数可能小于请求的字节数；如果已到达流的末尾，则为零 (0)。</returns>
         public override int Read(byte[] buffer, int offset, int count)
         {
-            lock (this)
+            lock (_lockObj)
             {
                 if (_abort) throw new IOException("aborted");
 
@@ -138,7 +140,7 @@ namespace Yisoft.Framework.IO
         /// <returns>当前流中的新位置。</returns>
         public override long Seek(long offset, SeekOrigin origin)
         {
-            lock (this) return _stream.Seek(offset, origin);
+            lock (_lockObj) return _stream.Seek(offset, origin);
         }
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace Yisoft.Framework.IO
         /// <param name="value">所需的当前流的长度（以字节表示）。</param>
         public override void SetLength(long value)
         {
-            lock (this) _stream.SetLength(value);
+            lock (_lockObj) _stream.SetLength(value);
         }
 
         /// <summary>

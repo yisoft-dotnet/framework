@@ -189,7 +189,7 @@ namespace Yisoft.Framework.Utilities
             path = RemoveDoubleSeperators(seperator, path.Replace('\\', seperator).Replace('/', seperator));
             path = path.Trim(seperator);
 
-            if (path != string.Empty) path += seperator;
+            if (!string.IsNullOrEmpty(path)) path += seperator;
 
             return path;
         }
@@ -204,7 +204,7 @@ namespace Yisoft.Framework.Utilities
         {
             if (path == null) throw new ArgumentNullException(nameof(path));
 
-            if (path.StartsWith(appPath)) return path;
+            if (path.StartsWith(appPath, StringComparison.CurrentCulture)) return path;
 
             if (path[0] != '/' && path[0] != '\\') path = "/" + path;
 
@@ -219,20 +219,27 @@ namespace Yisoft.Framework.Utilities
         /// <returns>已经删除重复分隔符的路径字符串。</returns>
         public static string RemoveDoubleSeperators(char seperator, string path)
         {
+            if (string.IsNullOrEmpty(path)) return null;
+
             var s = seperator.ToString();
             var d = s + s;
 
-            while (path.IndexOf(d, StringComparison.Ordinal) != -1) path = path.Replace(d, s);
+            while (path.IndexOf(d, StringComparison.Ordinal) != -1) path = path.Replace(d, s, StringComparison.CurrentCulture);
 
             return path;
         }
 
         /// <summary>
-        /// 返回虚拟路径的目录部分。 
+        /// 返回虚拟路径的目录部分。
         /// </summary>
         /// <param name="path">虚拟路径</param>
         /// <returns>虚拟路径中引用的目录。</returns>
-        public static string GetDirectoryPath(string path) { return Regex.Replace(path.Replace("\\", "/"), "[^/]+?$", string.Empty, _REGEX_OPTIONS); }
+        public static string GetDirectoryPath(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return null;
+
+            return Regex.Replace(path.Replace("\\", "/", StringComparison.CurrentCulture), "[^/]+?$", string.Empty, _REGEX_OPTIONS);
+        }
 
         /// <summary>
         /// 返回指定路径字符串的目录信息。

@@ -18,6 +18,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         /// <param name="str1">参与运算的第一个字符串。</param>
         /// <param name="str2">参与运算的第二个字符串。</param>
         /// <returns>返回 <see cref="LevenshteinDistanceResult"/>。</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<挂起>")]
         public static LevenshteinDistanceResult Compute(string str1, string str2)
         {
             if (str1 == null) throw new ArgumentNullException(nameof(str1));

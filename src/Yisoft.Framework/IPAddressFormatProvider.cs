@@ -25,7 +25,16 @@ namespace Yisoft.Framework
         {
             if (arg == null || arg.ToString().Length == 0) return string.Empty;
 
-            if (!(arg is IPAddress ipAddress)) IPAddress.TryParse(arg.ToString(), out ipAddress);
+            IPAddress ipAddress = null;
+
+            if (arg is IPAddress address)
+            {
+                ipAddress = address;
+            }
+            else if (IPAddress.TryParse(arg.ToString(), out address))
+            {
+                ipAddress = address;
+            }
 
             if (ipAddress == null) return arg.ToString();
             if (string.IsNullOrEmpty(format)) return ipAddress.ToString();

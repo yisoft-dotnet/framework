@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -90,9 +91,11 @@ namespace Yisoft.Framework
         /// </summary>
         public Dictionary<TEnum, TEnumDescription> Descriptions { get; }
 
+
         /// <summary>
         /// 获取指定枚举类型的字段元数据的集合。
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "<挂起>")]
         public FieldInfo[] FieldInfos { get; }
 
         /// <summary>
@@ -200,7 +203,7 @@ namespace Yisoft.Framework
             var list = canFilter ? Descriptions.Select(item => item) : DefaultDescriptions.Select(item => item);
 
             foreach (var item in list)
-                if (string.Compare(item.Value.Title, descriptionValue, ignoreCase) == 0)
+                if (string.Compare(item.Value.Title, descriptionValue, ignoreCase, CultureInfo.CurrentCulture) == 0)
                     return item.Key;
 
             return default;

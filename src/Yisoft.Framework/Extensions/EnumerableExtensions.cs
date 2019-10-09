@@ -25,6 +25,8 @@ namespace Yisoft.Framework.Extensions
 
         public static string ToString<T>(this IEnumerable<T> source, string separator)
         {
+            if (source == null) return string.Empty;
+
             StringBuilder sb = null;
 
             foreach (var item in source)
@@ -40,6 +42,8 @@ namespace Yisoft.Framework.Extensions
 
         public static string ToString<T>(this IEnumerable<T> source, Func<T, string> toString, string separator)
         {
+            if (source == null) return string.Empty;
+
             StringBuilder sb = null;
 
             foreach (var item in source)

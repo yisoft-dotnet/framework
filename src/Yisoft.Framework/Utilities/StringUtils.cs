@@ -18,7 +18,7 @@ namespace Yisoft.Framework.Utilities
         /// </summary>
         private const RegexOptions _REGEX_OPTIONS = RegexOptions.IgnoreCase | RegexOptions.Singleline;
 
-        public static readonly string[] EmptyStringArray = { };
+        public static readonly string[] EmptyStringArray = Array.Empty<string>();
 
         /// <summary>
         /// 返回已格式化的包含HTML标记的文本内容。
@@ -78,12 +78,12 @@ namespace Yisoft.Framework.Utilities
         /// <returns>字符串数组。</returns>
         public static string[] RegexSplit(string input, string pattern)
         {
-            if (string.IsNullOrEmpty(input)) return new string[] { };
-            if (string.IsNullOrEmpty(pattern)) return new string[] { };
+            if (string.IsNullOrEmpty(input)) return Array.Empty<string>();
+            if (string.IsNullOrEmpty(pattern)) return Array.Empty<string>();
 
             return input.IndexOf(pattern, StringComparison.Ordinal) < 0
                 ? new[] {input}
-                : Regex.Split(input, pattern.Replace(".", @"\."), _REGEX_OPTIONS);
+                : Regex.Split(input, pattern.Replace(".", @"\.", StringComparison.CurrentCulture), _REGEX_OPTIONS);
         }
 
         /// <summary>
@@ -226,6 +226,8 @@ namespace Yisoft.Framework.Utilities
 
         public static void ToCharAsUnicode(char c, char[] buffer)
         {
+            if (buffer == null || buffer.Length == 0) return;
+
             buffer[0] = '\\';
             buffer[1] = 'u';
             buffer[2] = MathUtils.IntToHex((c >> 12) & '\x000f');
@@ -238,67 +240,67 @@ namespace Yisoft.Framework.Utilities
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join("_", words).ToUpper();
+            return string.Join("_", words).ToUpper(CultureInfo.CurrentCulture);
         }
 
         public static string ToUnderscoreLowerCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join("_", words).ToLower();
+            return string.Join("_", words).ToLower(CultureInfo.CurrentCulture);
         }
 
         public static string ToHyphenUpperCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join("-", words).ToUpper();
+            return string.Join("-", words).ToUpper(CultureInfo.CurrentCulture);
         }
 
         public static string ToHyphenLowerCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join("-", words).ToLower();
+            return string.Join("-", words).ToLower(CultureInfo.CurrentCulture);
         }
 
         public static string ToDotUpperCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join(".", words).ToUpper();
+            return string.Join(".", words).ToUpper(CultureInfo.CurrentCulture);
         }
 
         public static string ToDotLowerCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join(".", words).ToLower();
+            return string.Join(".", words).ToLower(CultureInfo.CurrentCulture);
         }
 
         public static string ToWordUpperCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join(" ", words).ToUpper();
+            return string.Join(" ", words).ToUpper(CultureInfo.CurrentCulture);
         }
 
         public static string ToWordLowerCase(string original, bool camelCase = true)
         {
             var words = SplitByCharacterType(original, camelCase);
 
-            return string.Join(" ", words).ToLower();
+            return string.Join(" ", words).ToLower(CultureInfo.CurrentCulture);
         }
 
-        public static string ToAllUpperCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToUpper(); }
+        public static string ToAllUpperCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToUpper(CultureInfo.CurrentCulture); }
 
-        public static string ToAllLowerCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToLower(); }
+        public static string ToAllLowerCase(string original, bool camelCase = true) { return string.Concat(SplitByCharacterType(original, camelCase)).ToLower(CultureInfo.CurrentCulture); }
 
         public static string ToCamelCase(string original)
         {
             var s = ToPascalCase(original);
 
-            return s.Length < 1 ? string.Empty : char.ToLower(s[0]) + s.Substring(1);
+            return s.Length < 1 ? string.Empty : char.ToLower(s[0], CultureInfo.CurrentCulture) + s.Substring(1);
         }
 
         public static string ToPascalCase(string original)
@@ -308,8 +310,8 @@ namespace Yisoft.Framework.Utilities
 
             foreach (var word in words)
             {
-                s.Append(char.ToUpper(word[0]));
-                s.Append(word.Substring(1).ToLower());
+                s.Append(char.ToUpper(word[0], CultureInfo.CurrentCulture));
+                s.Append(word.Substring(1).ToLower(CultureInfo.CurrentCulture));
             }
 
             return s.ToString();
@@ -382,6 +384,8 @@ namespace Yisoft.Framework.Utilities
 
         public static string ToSBC(string input)
         {
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+
             var c = input.ToCharArray();
 
             for (var i = 0; i < c.Length; i++)
@@ -401,6 +405,8 @@ namespace Yisoft.Framework.Utilities
 
         public static string ToDBC(string input)
         {
+            if (string.IsNullOrEmpty(input)) return string.Empty;
+
             var c = input.ToCharArray();
 
             for (var i = 0; i < c.Length; i++)

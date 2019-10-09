@@ -21,6 +21,7 @@ namespace Yisoft.Framework.Extensions
         /// <param name="queryString">表示 HTTP QueryString 字符串。</param>
         public static void ReadQueryString(this NameValueCollection collection, string queryString)
         {
+            if (collection == null) return;
             if (queryString == null) throw new ArgumentNullException(nameof(queryString));
 
             var items = queryString.Split(new[] {'&'}, StringSplitOptions.RemoveEmptyEntries);
@@ -40,6 +41,8 @@ namespace Yisoft.Framework.Extensions
         /// <returns>返回 HTTP QueryString 字符串。</returns>
         public static string ToQueryString(this NameValueCollection collection)
         {
+            if (collection == null) return string.Empty;
+
             var queryString = new StringBuilder();
 
             foreach (var key in collection.AllKeys)

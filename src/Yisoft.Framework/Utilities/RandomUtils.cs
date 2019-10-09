@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Yisoft.Framework.Utilities
 {
-    public class RandomUtils
+    public static class RandomUtils
     {
         /// <summary>
         /// 获取伪随机数生成器的实例。
         /// </summary>
-        public static Random Random = new Random();
+        public static readonly Random Random = new Random();
 
         /// <summary>
         /// 生成随机字符串。

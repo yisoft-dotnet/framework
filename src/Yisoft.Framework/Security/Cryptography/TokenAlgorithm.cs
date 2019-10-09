@@ -43,17 +43,21 @@ namespace Yisoft.Framework.Security.Cryptography
 
         public string Encrypt(string input, string key, TokenSalt salt)
         {
+            if (salt == null) throw new ArgumentNullException(nameof(salt));
+
             var keyBuffer = Encoding.UTF8.GetBytes(key + salt.Salt);
 
-            using (var sha = IncrementalHash.CreateHMAC(_settings.HashAlgorithm, keyBuffer))
-            {
-                sha.AppendData(Encoding.UTF8.GetBytes(input));
+            using var sha = IncrementalHash.CreateHMAC(_settings.HashAlgorithm, keyBuffer);
 
-                var buffer = sha.GetHashAndReset();
-                var token = BitConverter.ToString(buffer).Replace("-", string.Empty).ToLower();
+            sha.AppendData(Encoding.UTF8.GetBytes(input));
 
-                return _AddSalt(token, salt);
-            }
+            var buffer = sha.GetHashAndReset();
+
+            var token = BitConverter.ToString(buffer)
+                .Replace("-", string.Empty, StringComparison.CurrentCulture)
+                .ToLower(CultureInfo.CurrentCulture);
+
+            return _AddSalt(token, salt);
         }
 
         public TokenSalt GetSalt(string token)
@@ -67,8 +71,7 @@ namespace Yisoft.Framework.Security.Cryptography
             var data = decoded.Substring(dataPosition, dataLength);
             var timestamp = decoded.Substring(dataPosition + _settings.DataMaxlength - _TIMESTAMP_LENGTH, _TIMESTAMP_LENGTH);
 
-            return new TokenSalt(salt, data, int.Parse(timestamp, NumberStyles.HexNumber), versionPosition, saltPosition, dataPosition,
-                dataLength);
+            return new TokenSalt(salt, data, int.Parse(timestamp, NumberStyles.HexNumber), versionPosition, saltPosition, dataPosition, dataLength);
         }
 
         protected virtual string _GenerateSalt()
@@ -87,6 +90,8 @@ namespace Yisoft.Framework.Security.Cryptography
 
         protected virtual string _AddSalt(string token, TokenSalt salt)
         {
+            if (salt == null) throw new ArgumentNullException(nameof(salt));
+
             token = _Replace(token, 2, salt.VersionPosition.ToString());
 
             // add version
@@ -106,7 +111,7 @@ namespace Yisoft.Framework.Security.Cryptography
                 {
                     var message = $"data length is not in range, max length is {_settings.DataMaxlength - _TIMESTAMP_LENGTH}";
 
-                    throw new ArgumentOutOfRangeException(nameof(salt.Data), message);
+                    throw new ArgumentOutOfRangeException(nameof(salt), message);
                 }
 
                 token = _Replace(token, salt.DataPosition, salt.Data);

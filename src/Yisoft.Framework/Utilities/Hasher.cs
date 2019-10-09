@@ -47,7 +47,6 @@ namespace Yisoft.Framework.Utilities
         {
             _hashCode = 37 * _hashCode + (obj?.GetHashCode() ?? -1);
 
-
             return this;
         }
 
@@ -70,6 +69,8 @@ namespace Yisoft.Framework.Utilities
 
         public Hasher HashStructElements<T>(IEnumerable<T> sequence) where T : struct
         {
+            if (sequence == null) return this;
+
             foreach (var value in sequence) _hashCode = 37 * _hashCode + value.GetHashCode();
 
             return this;

@@ -13,6 +13,8 @@ namespace Yisoft.Framework.Utilities
     {
         public static string GetPropertyName<T, TProperty>(Expression<Func<T, TProperty>> property)
         {
+            if (property == null) throw new ArgumentNullException(nameof(property));
+
             PropertyInfo propertyInfo = null;
             var body = property.Body;
 
@@ -35,6 +37,8 @@ namespace Yisoft.Framework.Utilities
 
         public static string GetPropertyName<T>(Expression<Func<T, object>> property)
         {
+            if (property == null) throw new ArgumentNullException(nameof(property));
+
             PropertyInfo propertyInfo = null;
             var body = property.Body;
 
