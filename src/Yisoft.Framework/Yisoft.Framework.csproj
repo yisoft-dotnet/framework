@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Description>dotnet convenient development framework.</Description>
@@ -18,7 +18,9 @@
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat> 
+        <IncludeSource>true</IncludeSource>
+        <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat> 
+        <!-- <SymbolPackageFormat>snupkg</SymbolPackageFormat>  -->
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     </PropertyGroup>
