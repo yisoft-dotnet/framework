@@ -43,6 +43,8 @@ namespace Yisoft.Framework.Utilities
         /// <returns>返回 <see cref="string"/>。</returns>
         public static string Int64ToBase(long input, string baseChars = ALPHA_NUMERIC62)
         {
+            if (string.IsNullOrEmpty(baseChars)) throw new ArgumentNullException(nameof(baseChars));
+
             var r = string.Empty;
             var targetBase = baseChars.Length;
 
@@ -67,7 +69,7 @@ namespace Yisoft.Framework.Utilities
             var srcBase = baseChars.Length;
             var r = input.Reverse().ToList();
 
-            return r.Select(t => baseChars.IndexOf(t)).Select((charIndex, i) => charIndex * (long) Math.Pow(srcBase, i)).Sum();
+            return r.Select(t => baseChars.IndexOf(t, StringComparison.CurrentCulture)).Select((charIndex, i) => charIndex * (long) Math.Pow(srcBase, i)).Sum();
         }
 
         public static int IntLength(ulong i)

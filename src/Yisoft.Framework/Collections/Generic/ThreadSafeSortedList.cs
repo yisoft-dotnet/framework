@@ -6,11 +6,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 namespace Yisoft.Framework.Collections.Generic
 {
-    public class ThreadSafeSortedList<TKey, TValue> : IDictionary<TKey, TValue>
+    [SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<挂起>")]
+    public class ThreadSafeSortedList<TKey, TValue> : IDictionary<TKey, TValue>, IDisposable
     {
         private readonly SortedList<TKey, TValue> _items = new SortedList<TKey, TValue>();
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
@@ -256,5 +258,32 @@ namespace Yisoft.Framework.Collections.Generic
                 _lock.ExitWriteLock();
             }
         }
+
+        #region IDisposable
+
+        private bool _disposed;
+
+        [SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<挂起>")]
+        public void Dispose(bool disposing)
+        {
+            if (_disposed) return; //如果已经被回收，就中断执行
+
+            if (disposing)
+            {
+                _lock?.Dispose();
+            }
+
+            _disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~ThreadSafeSortedList() { Dispose(false); }
+
+        #endregion
     }
 }

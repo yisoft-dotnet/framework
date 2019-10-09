@@ -4,6 +4,7 @@
 // ===============================================================================
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -24,12 +25,12 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <returns>计算所得的哈希代码。</returns>
         public static byte[] ComputeHash<T>(Stream input, byte[] key) where T : HMAC, new()
         {
-            using (var s = new T())
+            using var s = new T
             {
-                s.Key = key;
+                Key = key
+            };
 
-                return s.ComputeHash(input);
-            }
+            return s.ComputeHash(input);
         }
 
         /// <summary>
@@ -41,12 +42,12 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <returns>计算所得的哈希代码。</returns>
         public static byte[] ComputeHash<T>(byte[] input, byte[] key) where T : HMAC, new()
         {
-            using (var s = new T())
+            using var s = new T
             {
-                s.Key = key;
+                Key = key
+            };
 
-                return s.ComputeHash(input);
-            }
+            return s.ComputeHash(input);
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace Yisoft.Framework.Security.Cryptography
 
             var hashValue = BitConverter.ToString(ComputeHash<T>(encoding.GetBytes(input), encoding.GetBytes(key)));
 
-            return lowerCase ? hashValue.ToLower() : hashValue;
+            return lowerCase ? hashValue.ToLower(CultureInfo.CurrentCulture) : hashValue;
         }
 
         /// <summary>

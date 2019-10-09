@@ -10,37 +10,28 @@ using System.Linq;
 
 namespace Yisoft.Framework.IntelligentAlgorithms
 {
-    public struct Slice<T> : IEnumerable<T>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<挂起>")]
+    public struct Slice<T> : IEnumerable<T>, IEquatable<Slice<T>>
     {
-        public Slice(T[] array) : this(array, 0, array.Length) { }
+        public Slice(T[] array) : this(array, 0, array?.Length ?? 0) { }
 
         public Slice(T[] array, int offset, int length)
         {
-            if (offset + length > array.Length) throw new ArgumentException("Invalid slice");
+            if (offset + length > (array?.Length ?? 0)) throw new ArgumentException("Invalid slice");
 
             Array = array;
             Offset = offset;
             Length = length;
         }
 
-        public readonly T[] Array;
-        public readonly int Offset;
-        public readonly int Length;
+        public T[] Array { get; }
+        public int Offset { get; }
+        public int Length { get; }
 
         public T this[int index]
         {
-            get
-            {
-                if (index > Length) throw new IndexOutOfRangeException();
-
-                return Array[Offset + index];
-            }
-            set
-            {
-                if (index > Length) throw new IndexOutOfRangeException();
-
-                Array[Offset + index] = value;
-            }
+            get => Array[Offset + index];
+            set => Array[Offset + index] = value;
         }
 
         public Slice<T> SubSlice(int relativeIndex, int length) { return new Slice<T>(Array, Offset + relativeIndex, length); }
@@ -54,5 +45,41 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         public IEnumerator<T> GetEnumerator() { return Array.Skip(Offset).Take(Length).GetEnumerator(); }
 
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+
+        #region Equality members
+
+        public bool Equals(Slice<T> other)
+        {
+            return Equals(Array, other.Array) && Offset == other.Offset && Length == other.Length;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Slice<T> other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Array != null ? Array.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Offset;
+                hashCode = (hashCode * 397) ^ Length;
+
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(Slice<T> left, Slice<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Slice<T> left, Slice<T> right)
+        {
+            return !(left == right);
+        }
+
+        #endregion
     }
 }

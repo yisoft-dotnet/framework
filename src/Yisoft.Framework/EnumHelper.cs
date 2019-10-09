@@ -35,8 +35,8 @@ namespace Yisoft.Framework
         {
             var enumType = typeof(T);
 
-            if (enumType == null) throw new ArgumentException();
-            if (enumType.GetTypeInfo().IsEnum == false) throw new ArgumentException();
+            if (enumType == null) throw new TypeAccessException();
+            if (enumType.GetTypeInfo().IsEnum == false) throw new TypeAccessException();
 
             var enumFields = Enum.GetValues(enumType);
             var result = new HashSet<T>();
@@ -50,8 +50,8 @@ namespace Yisoft.Framework
 
         public static List<EnumExtraInfo> GetExtras(Type enumType)
         {
-            if (enumType == null) throw new ArgumentException();
-            if (enumType.GetTypeInfo().IsEnum == false) throw new ArgumentException();
+            if (enumType == null) throw new ArgumentNullException(nameof(enumType));
+            if (enumType.GetTypeInfo().IsEnum == false) throw new ArgumentException("The type is not a enum.", nameof(enumType));
 
             var enumFields = Enum.GetValues(enumType);
 
@@ -71,9 +71,9 @@ namespace Yisoft.Framework
         {
             var enumType = typeof(T);
 
-            if (enumType == null) throw new ArgumentException();
-            if (enumType.GetTypeInfo().IsEnum == false) throw new ArgumentException();
-            if (enumObj == null) throw new ArgumentException();
+            if (enumType == null) throw new TypeAccessException(nameof(enumType));
+            if (enumType.GetTypeInfo().IsEnum == false) throw new ArgumentException(nameof(enumType));
+            if (enumObj == null) throw new ArgumentNullException(nameof(enumObj));
 
             var x = Convert.ToInt32(enumObj);
             var result = new HashSet<T>();

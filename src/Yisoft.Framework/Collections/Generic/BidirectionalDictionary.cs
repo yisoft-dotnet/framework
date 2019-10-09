@@ -57,14 +57,11 @@ namespace Yisoft.Framework.Collections.Generic
 
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
-        {
-            ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).CopyTo(array, arrayIndex);
-        }
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) { ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).CopyTo(array, arrayIndex); }
 
         public bool ContainsKey(TKey key) { return _keysToValues.ContainsKey(key); }
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) { return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item); }
+        public bool Contains(KeyValuePair<TKey, TValue> item) { return ((ICollection<KeyValuePair<TKey, TValue>>) _keysToValues).Contains(item); }
 
         public bool TryGetValue(TKey key, out TValue value) { return _keysToValues.TryGetValue(key, out value); }
 
@@ -77,7 +74,6 @@ namespace Yisoft.Framework.Collections.Generic
                 if (value == null) throw new ArgumentNullException(nameof(value));
 
                 if (_ValueBelongsToOtherKey(key, value)) throw new ArgumentException("Value already exists", nameof(value));
-
 
                 if (_keysToValues.TryGetValue(key, out var oldValue))
                 {
@@ -97,7 +93,7 @@ namespace Yisoft.Framework.Collections.Generic
 
         public int Count => _keysToValues.Count;
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => false;
+        public bool IsReadOnly => false;
 
         public void Add(TKey key, TValue value)
         {

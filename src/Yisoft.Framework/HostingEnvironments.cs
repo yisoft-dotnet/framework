@@ -4,6 +4,7 @@
 // ===============================================================================
 
 using System;
+using System.Globalization;
 
 namespace Yisoft.Framework
 {
@@ -23,9 +24,9 @@ namespace Yisoft.Framework
 
         public static string NormalizeEnvName(string envName, string defaultValue = Local)
         {
-            if (string.IsNullOrWhiteSpace(envName)) return defaultValue ?? string.Empty;
+            if (string.IsNullOrEmpty(envName)) return defaultValue ?? string.Empty;
 
-            return envName.ToLower();
+            return envName.ToLower(CultureInfo.CurrentCulture);
         }
 
         public static string Postfix(string input, string envName, string hiddenValue = Local, string separator = "_")

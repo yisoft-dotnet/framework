@@ -12,6 +12,8 @@ namespace Yisoft.Framework.Extensions
     {
         public static string ReadString(this BinaryReader reader, bool endWith0)
         {
+            if (reader == null) return null;
+
             if (!endWith0) return reader.ReadString();
 
             var contentBuilder = new StringBuilder();

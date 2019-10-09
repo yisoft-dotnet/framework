@@ -9,7 +9,7 @@ namespace Yisoft.Framework.Security.Cryptography
 {
     public class TokenHashSettings
     {
-        public static TokenHashSettings MD5 = new TokenHashSettings
+        public static readonly TokenHashSettings MD5 = new TokenHashSettings
         {
             Version = 1,
             HashAlgorithm = HashAlgorithmName.MD5,
@@ -28,7 +28,7 @@ namespace Yisoft.Framework.Security.Cryptography
             DataPosEnd = 31
         };
 
-        public static TokenHashSettings SHA1 = new TokenHashSettings
+        public static readonly TokenHashSettings SHA1 = new TokenHashSettings
         {
             Version = 2,
             HashAlgorithm = HashAlgorithmName.SHA1,
@@ -47,7 +47,7 @@ namespace Yisoft.Framework.Security.Cryptography
             DataPosEnd = 39
         };
 
-        public static TokenHashSettings SHA256 = new TokenHashSettings
+        public static readonly TokenHashSettings SHA256 = new TokenHashSettings
         {
             Version = 3,
             HashAlgorithm = HashAlgorithmName.SHA256,
@@ -66,7 +66,7 @@ namespace Yisoft.Framework.Security.Cryptography
             DataPosEnd = 61
         };
 
-        public static TokenHashSettings SHA384 = new TokenHashSettings
+        public static readonly TokenHashSettings SHA384 = new TokenHashSettings
         {
             Version = 3,
             HashAlgorithm = HashAlgorithmName.SHA384,
@@ -85,7 +85,7 @@ namespace Yisoft.Framework.Security.Cryptography
             DataPosEnd = 95
         };
 
-        public static TokenHashSettings SHA512 = new TokenHashSettings
+        public static readonly TokenHashSettings SHA512 = new TokenHashSettings
         {
             Version = 4,
             HashAlgorithm = HashAlgorithmName.SHA512,

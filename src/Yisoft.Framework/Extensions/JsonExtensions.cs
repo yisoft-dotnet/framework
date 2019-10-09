@@ -15,6 +15,8 @@ namespace Yisoft.Framework.Extensions
     {
         public static string ToQueryString(this JToken jToken, bool escape = true)
         {
+            if (jToken == null) return null;
+
             var jValues = new SortedList<string, string>();
             var builder = new StringBuilder();
 

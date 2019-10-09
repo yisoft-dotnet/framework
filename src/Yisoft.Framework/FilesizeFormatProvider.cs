@@ -24,8 +24,11 @@ namespace Yisoft.Framework
         /// <param name="arg">要格式化的对象。</param>
         /// <param name="formatProvider">一个 System.IFormatProvider 对象，它提供有关当前实例的格式信息。</param>
         /// <returns>arg 的值的字符串表示形式，按照 format 和 formatProvider 的指定来进行格式设置。</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<挂起>")]
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
+            if (arg == null) return null;
+
             var iformat = format;
 
             if (iformat == null || !iformat.StartsWith(_FORMAT, StringComparison.OrdinalIgnoreCase) || arg is string) return _DefaultFormat(iformat, arg, formatProvider);
@@ -47,7 +50,7 @@ namespace Yisoft.Framework
 
             if (string.IsNullOrEmpty(precision)) precision = "2";
 
-            var other = iformat.Replace(precision, string.Empty);
+            var other = iformat.Replace(precision, string.Empty, StringComparison.CurrentCulture);
 
             return _FormatFileSize(size, "N" + precision) + other;
         }
@@ -81,7 +84,7 @@ namespace Yisoft.Framework
 
             while (i > 1024)
             {
-                i = i / 1024.0M;
+                i /= 1024.0M;
 
                 if (n++ == 10) break;
             }

@@ -5,7 +5,7 @@
 
 namespace Yisoft.Framework.Security.Cryptography
 {
-    public class TokenHelper
+    public static class TokenHelper
     {
         public static readonly TokenAlgorithm MD5 = new TokenAlgorithm(TokenHashSettings.MD5);
 

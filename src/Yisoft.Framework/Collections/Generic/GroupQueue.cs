@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Yisoft.Framework.Collections.Generic
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1010:Collections should implement generic interface", Justification = "<挂起>")]
     public class GroupQueue<T> : Queue<T>
     {
         public GroupQueue() { }

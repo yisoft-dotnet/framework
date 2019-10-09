@@ -40,6 +40,9 @@ namespace Yisoft.Framework.Extensions
 
         public static ObjectCompareContext<T> Then<T>(this ObjectCompareContext<T> context, Func<T, int> compareToFunc)
         {
+            if (context == null) return null;
+            if (compareToFunc == null) return null;
+
             if (context.Value != 0) return context;
 
             context.Value = compareToFunc(context.Obj);
@@ -51,6 +54,6 @@ namespace Yisoft.Framework.Extensions
 
         public static int CompareTo(this string a, string b, CultureInfo culture, CompareOptions options = CompareOptions.None) { return string.Compare(a, b, culture, options); }
 
-        public static int End<T>(this ObjectCompareContext<T> context) { return context.Value; }
+        public static int End<T>(this ObjectCompareContext<T> context) { return (context?.Value).GetValueOrDefault(); }
     }
 }

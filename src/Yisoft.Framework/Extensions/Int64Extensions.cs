@@ -3,6 +3,7 @@
 // Copyright © Yi.TEAM. All rights reserved.
 // ===============================================================================
 
+using System;
 using Yisoft.Framework.Utilities;
 
 namespace Yisoft.Framework.Extensions
@@ -33,6 +34,11 @@ namespace Yisoft.Framework.Extensions
         /// <param name="input">指定一个 <see cref="long"/>。</param>
         /// <param name="baseChars">指定目标进制元字符的字符串序列。</param>
         /// <returns>返回 <see cref="string"/>。</returns>
-        public static string ToBase(this long input, string baseChars = MathUtils.ALPHA_NUMERIC62) { return MathUtils.Int64ToBase(input, baseChars); }
+        public static string ToBase(this long input, string baseChars = MathUtils.ALPHA_NUMERIC62)
+        {
+            if (string.IsNullOrEmpty(baseChars)) throw new ArgumentNullException(nameof(baseChars));
+
+            return MathUtils.Int64ToBase(input, baseChars);
+        }
     }
 }

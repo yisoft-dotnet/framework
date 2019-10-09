@@ -20,27 +20,27 @@ namespace Yisoft.Framework.Extensions
         /// <summary>
         /// 返回当前枚举值描述特性的实例。
         /// </summary>
-        /// <param name="enum">枚举值。</param>
+        /// <param name="enumObj">枚举值。</param>
         /// <returns>返回 <see cref="EnumExtraAttribute"/> 对象的实例。</returns>
-        public static EnumExtraAttribute GetDescription(this Enum @enum) { return GetDescription<EnumExtraAttribute>(@enum); }
+        public static EnumExtraAttribute GetDescription(this Enum enumObj) { return GetDescription<EnumExtraAttribute>(enumObj); }
 
         /// <summary>
         /// 返回当前枚举值描述特性的实例。
         /// </summary>
         /// <typeparam name="T">要获取的对象的类型。</typeparam>
-        /// <param name="enum">枚举值。</param>
+        /// <param name="enumObj">枚举值。</param>
         /// <returns>返回 <typeparamref name="T"/> 对象的实例。</returns>
-        public static T GetDescription<T>(this Enum @enum) where T : EnumExtraAttribute
+        public static T GetDescription<T>(this Enum enumObj) where T : EnumExtraAttribute
         {
-            if (@enum == null) throw new ArgumentNullException(nameof(@enum));
+            if (enumObj == null) throw new ArgumentNullException(nameof(enumObj));
 
-            var enumType = @enum.GetType();
+            var enumType = enumObj.GetType();
             var attrType = typeof(T);
-            var cacheKey = $"{enumType.FullName}`{@enum}`{attrType.FullName}";
+            var cacheKey = $"{enumType.FullName}`{enumObj}`{attrType.FullName}";
 
             if (_Caches[cacheKey] is T descriptionObject) return descriptionObject;
 
-            var fieldName = @enum.ToString();
+            var fieldName = enumObj.ToString();
             var fieldInfo = enumType.GetTypeInfo().GetField(fieldName);
 
             descriptionObject = fieldInfo.GetCustomAttributes(attrType, true).FirstOrDefault() as T;
@@ -57,18 +57,18 @@ namespace Yisoft.Framework.Extensions
         /// </summary>
         /// <typeparam name="T">要获取的对象的类型。</typeparam>
         /// <typeparam name="TValue">要获取的对象的值的类型。</typeparam>
-        /// <param name="enum">枚举值。</param>
+        /// <param name="enumObj">枚举值。</param>
         /// <param name="getValueFunction">指定如何获取对象的值。</param>
         /// <param name="defaultValue">在方法返回时，如果没有获取到有效的值，则使用该默认值代替。</param>
         /// <returns>返回 <typeparamref name="TValue"/> 对象。</returns>
-        public static TValue GetDescriptionValue<T, TValue>(this Enum @enum,
+        public static TValue GetDescriptionValue<T, TValue>(this Enum enumObj,
             Func<T, TValue> getValueFunction,
             TValue defaultValue = default)
             where T : EnumExtraAttribute
         {
             if (getValueFunction == null) throw new ArgumentNullException(nameof(getValueFunction));
 
-            var description = GetDescription<T>(@enum);
+            var description = GetDescription<T>(enumObj);
 
             if (description == null) return defaultValue;
 
@@ -80,24 +80,24 @@ namespace Yisoft.Framework.Extensions
         /// <summary>
         /// 返回当前枚举值的数字值。
         /// </summary>
-        /// <param name="enum">枚举值。</param>
+        /// <param name="enumObj">枚举值。</param>
         /// <returns>返回 <see cref="int"/>。</returns>
-        public static int ToInt32(this Enum @enum) { return Convert.ToInt32(@enum); }
+        public static int ToInt32(this Enum enumObj) { return Convert.ToInt32(enumObj); }
 
         /// <summary>
         /// 返回当前枚举值的数字值。
         /// </summary>
-        /// <param name="enum">枚举值。</param>
+        /// <param name="enumObj">枚举值。</param>
         /// <returns>返回 <see cref="long"/>。</returns>
-        public static long ToInt64(this Enum @enum) { return Convert.ToInt64(@enum); }
+        public static long ToInt64(this Enum enumObj) { return Convert.ToInt64(enumObj); }
 
-        public static EnumExtraInfo GetExtra(this Enum @enum)
+        public static EnumExtraInfo GetExtra(this Enum enumObj)
         {
-            var d = GetDescription(@enum);
-            var name = @enum.ToString();
-            var value = Convert.ToInt64(@enum);
+            var d = GetDescription(enumObj);
+            var name = enumObj?.ToString();
+            var value = enumObj.ToInt64();
 
-            return d == null ? new EnumExtraInfo(name, name, value) : d.GetExtra(@enum);
+            return d == null ? new EnumExtraInfo(name, name, value) : d.GetExtra(enumObj);
         }
     }
 }

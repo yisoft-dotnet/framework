@@ -11,6 +11,7 @@ using Yisoft.Framework.Extensions;
 
 namespace Yisoft.Framework.IntelligentAlgorithms
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<挂起>")]
     public class StringDistance
     {
         private static readonly Regex _WordsRegex = new Regex(@"([\w\d]+|\s+|.)");
@@ -22,6 +23,9 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             Func<Choice<char>, int> weight = null,
             bool allowTransposition = false)
         {
+            if (strOld == null) strOld = string.Empty;
+            if (strNew == null) strNew = string.Empty;
+
             return LevenshteinDistance(strOld.ToCharArray(), strNew.ToCharArray(), comparer, weight, allowTransposition);
         }
 
@@ -31,6 +35,9 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             Func<Choice<T>, int> weight = null,
             bool allowTransposition = false)
         {
+            if (strOld == null) strOld = Array.Empty<T>();
+            if (strNew == null) strNew = Array.Empty<T>();
+
             var m1 = strOld.Length + 1;
             var m2 = strNew.Length + 1;
 
@@ -78,6 +85,9 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             IEqualityComparer<char> comparer = null,
             Func<Choice<char>, int> weight = null)
         {
+            if (strOld == null) strOld = string.Empty;
+            if (strNew == null) strNew = string.Empty;
+
             return LevenshteinChoices(strOld.ToCharArray(), strNew.ToCharArray(), comparer, weight);
         }
 
@@ -103,8 +113,8 @@ namespace Yisoft.Framework.IntelligentAlgorithms
                 {
                     result.Add(Choice<T>.Equal(strOld[i - 1]));
 
-                    i = i - 1;
-                    j = j - 1;
+                    i -= 1;
+                    j -= 1;
                 }
                 else
                 {
@@ -122,20 +132,20 @@ namespace Yisoft.Framework.IntelligentAlgorithms
                     {
                         result.Add(cSubstitute);
 
-                        i = i - 1;
-                        j = j - 1;
+                        i -= 1;
+                        j -= 1;
                     }
                     else if (remove == min)
                     {
                         result.Add(cRemove);
 
-                        i = i - 1;
+                        i -= 1;
                     }
                     else if (add == min)
                     {
                         result.Add(cAdd);
 
-                        j = j - 1;
+                        j -= 1;
                     }
                 }
             }
@@ -144,14 +154,14 @@ namespace Yisoft.Framework.IntelligentAlgorithms
             {
                 result.Add(Choice<T>.Remove(strOld[i - 1]));
 
-                i = i - 1;
+                i -= 1;
             }
 
             while (j > 0)
             {
                 result.Add(Choice<T>.Add(strNew[j - 1]));
 
-                j = j - 1;
+                j -= 1;
             }
 
             result.Reverse();
@@ -163,7 +173,7 @@ namespace Yisoft.Framework.IntelligentAlgorithms
         {
             return string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2)
                 ? 0
-                : LongestCommonSubstring(str1.ToCharArray(), str2.ToCharArray(), out _, out var __);
+                : LongestCommonSubstring(str1.ToCharArray(), str2.ToCharArray(), out _, out _);
         }
 
         public int LongestCommonSubstring(string str1, string str2, out int startPos1, out int startPos2)
@@ -274,8 +284,8 @@ namespace Yisoft.Framework.IntelligentAlgorithms
 
         public List<DiffPair<List<DiffPair<string>>>> DiffText(string textOld, string textNew, bool lineEndingDifferences = true)
         {
-            textOld = textOld ?? string.Empty;
-            textNew = textNew ?? string.Empty;
+            if (textOld == null) textOld = string.Empty;
+            if (textNew == null) textNew = string.Empty;
 
             var linesOld = lineEndingDifferences ? textOld.Split('\n') : textOld.Lines();
             var linesNew = lineEndingDifferences ? textNew.Split('\n') : textNew.Lines();
@@ -327,8 +337,8 @@ namespace Yisoft.Framework.IntelligentAlgorithms
 
         public List<DiffPair<string>> DiffWords(string strOld, string strNew)
         {
-            var wordsOld = _WordsRegex.Matches(strOld).Cast<Match>().Select(m => m.Value).ToArray();
-            var wordsNew = _WordsRegex.Matches(strNew).Cast<Match>().Select(m => m.Value).ToArray();
+            var wordsOld = _WordsRegex.Matches(strOld).Select(m => m.Value).ToArray();
+            var wordsNew = _WordsRegex.Matches(strNew).Select(m => m.Value).ToArray();
 
             return Diff(wordsOld, wordsNew);
         }

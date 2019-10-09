@@ -12,7 +12,7 @@ namespace Yisoft.Framework
 {
     public static class JsonHelper
     {
-        public static JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings
+        public static JsonSerializerSettings DefaultJsonSerializerSettings { get; } = new JsonSerializerSettings
         {
             DateTimeZoneHandling = DateTimeZoneHandling.Local,
             ContractResolver = new CamelCasePropertyNamesContractResolver(),

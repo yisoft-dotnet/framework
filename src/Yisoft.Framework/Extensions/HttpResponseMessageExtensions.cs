@@ -13,16 +13,21 @@ namespace Yisoft.Framework.Extensions
     {
         public static T DeserializeJsonObject<T>(this HttpResponseMessage response)
         {
+            if (response == null) return default;
+
             var data = response.Content.ReadAsStringAsync().Result;
 
             return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
         }
 
-        public static async Task<T> DeserializeJsonObjectAsync<T>(this HttpResponseMessage response)
+        public static Task<T> DeserializeJsonObjectAsync<T>(this HttpResponseMessage response)
         {
-            var data = await response.Content.ReadAsStringAsync();
+            if (response == null) return default;
 
-            return JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
+            var data = response.Content.ReadAsStringAsync().Result;
+            var obj = JsonConvert.DeserializeObject<T>(data, JsonHelper.DefaultJsonSerializerSettings);
+
+            return Task.FromResult(obj);
         }
     }
 }

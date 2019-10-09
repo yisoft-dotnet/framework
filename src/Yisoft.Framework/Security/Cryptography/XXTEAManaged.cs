@@ -14,17 +14,6 @@ namespace Yisoft.Framework.Security.Cryptography
     /// </summary>
     public sealed class XXTEAManaged
     {
-        /// <summary>
-        /// 使用密钥初始化 XXTEA 算法。
-        /// </summary>
-        /// <param name="key">要使用的密钥。</param>
-        public XXTEAManaged(string key) { Key = key; }
-
-        /// <summary>
-        /// 获取或设置加密算法使用的密钥。
-        /// </summary>
-        public string Key { get; set; }
-
         private static uint[] _Encrypt(uint[] v, uint[] k)
         {
             var n = v.Length - 1;
@@ -84,7 +73,7 @@ namespace Yisoft.Framework.Security.Cryptography
             var y = v[0];
             const uint delta = 0x9E3779B9;
             var q = 6 + 52 / (n + 1);
-            var sum = unchecked((uint) (q * delta));
+            var sum = unchecked((uint)(q * delta));
 
             while (sum != 0)
             {
@@ -115,13 +104,13 @@ namespace Yisoft.Framework.Security.Cryptography
             if (includeLength)
             {
                 result = new uint[n + 1];
-                result[n] = (uint) data.Count;
+                result[n] = (uint)data.Count;
             }
             else result = new uint[n];
 
             n = data.Count;
 
-            for (var i = 0; i < n; i++) result[i >> 2] |= (uint) data[i] << ((i & 3) << 3);
+            for (var i = 0; i < n; i++) result[i >> 2] |= (uint)data[i] << ((i & 3) << 3);
 
             return result;
         }
@@ -130,12 +119,12 @@ namespace Yisoft.Framework.Security.Cryptography
         {
             int n;
 
-            if (includeLength) n = (int) data[data.Count - 1];
+            if (includeLength) n = (int)data[^1];
             else n = data.Count << 2;
 
             var result = new byte[n];
 
-            for (var i = 0; i < n; i++) result[i] = (byte) (data[i >> 2] >> ((i & 3) << 3));
+            for (var i = 0; i < n; i++) result[i] = (byte)(data[i >> 2] >> ((i & 3) << 3));
 
             return result;
         }
@@ -148,9 +137,8 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <returns>返回 <see cref="string"/> 。</returns>
         public static string Encrypt(string str, string key)
         {
-            var x = new XXTEAManaged(key);
             var e = Encoding.UTF8;
-            var b = x.Encrypt(e.GetBytes(str), e.GetBytes(x.Key));
+            var b = Encrypt(e.GetBytes(str), e.GetBytes(key));
 
             return Convert.ToBase64String(b);
         }
@@ -166,9 +154,8 @@ namespace Yisoft.Framework.Security.Cryptography
             if (string.IsNullOrWhiteSpace(str)) return string.Empty;
 
             var encoding = Encoding.UTF8;
-            var x = new XXTEAManaged(key);
 
-            return encoding.GetString(x.Decrypt(Convert.FromBase64String(str), encoding.GetBytes(x.Key)));
+            return encoding.GetString(Decrypt(Convert.FromBase64String(str), encoding.GetBytes(key)));
         }
 
         /// <summary>
@@ -177,8 +164,11 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <param name="data"></param>
         /// <param name="key">安全密钥。</param>
         /// <returns>返回 <see cref="byte"/> 数组。</returns>
-        public byte[] Encrypt(byte[] data, byte[] key)
+        public static byte[] Encrypt(byte[] data, byte[] key)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
             return data.Length == 0
                 ? data
                 : _ToByteArray(_Encrypt(_ToUInt32Array(data, true), _ToUInt32Array(key, false)), false);
@@ -190,8 +180,11 @@ namespace Yisoft.Framework.Security.Cryptography
         /// <param name="data">要解密的字节数组。</param>
         /// <param name="key">安全密钥。</param>
         /// <returns>返回 <see cref="byte"/> 数组。</returns>
-        public byte[] Decrypt(byte[] data, byte[] key)
+        public static byte[] Decrypt(byte[] data, byte[] key)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
             return data.Length == 0
                 ? data
                 : _ToByteArray(_Decrypt(_ToUInt32Array(data, false), _ToUInt32Array(key, false)), true);

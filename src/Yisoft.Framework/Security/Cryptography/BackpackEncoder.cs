@@ -37,6 +37,8 @@ namespace Yisoft.Framework.Security.Cryptography
 
         public string Encode(string input)
         {
+            if (input == null) return null;
+
             var result = new StringBuilder();
 
             foreach (var c in input) result.Append(_Backpackage[c]);
@@ -46,6 +48,8 @@ namespace Yisoft.Framework.Security.Cryptography
 
         public string Decode(string input)
         {
+            if (input == null) return null;
+
             var result = new StringBuilder();
 
             foreach (var c in input) result.Append(_Backpackage.GetKey(c));
@@ -53,7 +57,7 @@ namespace Yisoft.Framework.Security.Cryptography
             return result.ToString();
         }
 
-        public void Initialize(IDictionary<char, char> seeds)
+        public static void Initialize(IDictionary<char, char> seeds)
         {
             if (seeds == null || seeds.Count != 16) seeds = DefaultPackageSeeds;
 

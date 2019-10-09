@@ -14,14 +14,17 @@ namespace Yisoft.Framework.Extensions
     {
         public static void AddDictionary(this JObject jobject, Dictionary<string, object> dictionary)
         {
-            foreach (var item in dictionary)
+            if (jobject == null) return;
+            if (dictionary == null || dictionary.Count == 0) return;
+
+            foreach (var (key, value) in dictionary)
             {
-                if (jobject.TryGetValue(item.Key, out _)) throw new Exception($"Item does already exist - cannot add it via a custom entry: {item.Key}");
+                if (jobject.TryGetValue(key, out _)) throw new Exception($"Item does already exist - cannot add it via a custom entry: {key}");
 
                 jobject.Add(
-                    item.Value.GetType().GetTypeInfo().IsClass
-                        ? new JProperty(item.Key, JToken.FromObject(item.Value))
-                        : new JProperty(item.Key, item.Value)
+                    value.GetType().GetTypeInfo().IsClass
+                        ? new JProperty(key, JToken.FromObject(value))
+                        : new JProperty(key, value)
                 );
             }
         }

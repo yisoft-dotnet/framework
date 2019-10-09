@@ -4,6 +4,7 @@
 // ===============================================================================
 
 using System;
+using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,6 +16,8 @@ namespace Yisoft.Framework.Json.Converters
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            if (writer == null) return;
+
             if (value == null)
             {
                 writer.WriteNull();
@@ -47,6 +50,9 @@ namespace Yisoft.Framework.Json.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader == null) return null;
+            if (objectType == null) return null;
+
             if (reader.TokenType != JsonToken.StartObject) return base.ReadJson(reader, objectType, existingValue, serializer);
 
             string enumName = null;
@@ -58,7 +64,7 @@ namespace Yisoft.Framework.Json.Converters
 
                 if (reader.TokenType != JsonToken.PropertyName) continue;
 
-                switch (reader.Value.ToString().ToUpper())
+                switch (reader.Value.ToString().ToUpper(CultureInfo.CurrentCulture))
                 {
                     case "NAME":
                         enumName = reader.ReadAsString();
